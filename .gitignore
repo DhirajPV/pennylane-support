@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local working notes, not part of the submission
+CLAUDE.md
+.claude/

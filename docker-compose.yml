@@ -1,0 +1,41 @@
+name: pennylane-support
+
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: pennylane
+      POSTGRES_PASSWORD: pennylane
+      POSTGRES_DB: pennylane
+    # postgres:18 moved PGDATA to /var/lib/postgresql/18/docker. The pre-18
+    # /var/lib/postgresql/data mounts fine and persists nothing.
+    volumes:
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pennylane -d pennylane"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+      start_period: 5s
+    restart: "no"
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://pennylane:pennylane@db:5432/pennylane
+      QUOTA_CONVERSATIONS_PER_HOUR: 5
+      QUOTA_MESSAGES_PER_HOUR: 30
+      DEV: 1
+    volumes:
+      - .:/app
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    # Explicit, though it is the default: a failing migration or seed must stop
+    # and show its error rather than crash-loop.
+    restart: "no"
+
+volumes:
+  pgdata:

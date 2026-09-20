@@ -1,0 +1,30 @@
+[project]
+name = "pennylane-support"
+version = "0.1.0"
+description = "Community support platform for PennyLane coding challenges"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+
+# psycopg[binary] ships its own libpq wheel, so the image needs no compiler.
+dependencies = [
+    "fastapi==0.141.1",
+    "uvicorn[standard]==0.53.0",
+    "sqlalchemy==2.0.54",
+    "psycopg[binary]==3.3.6",
+    "alembic==1.20.0",
+    "pydantic==2.13.5",
+    "pydantic-settings==2.15.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.1.1",
+    "httpx==0.28.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]

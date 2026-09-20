@@ -1,0 +1,4102 @@
+{
+  "coding_challenges": [
+    {
+      "challenge_id": "CHAL_001",
+      "title": "Begin Here",
+      "description": "Solve a simple challenge to become familiar with this platform.",
+      "category": "Getting Started",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "basics",
+        "introduction",
+        "first-steps"
+      ],
+      "learning_objectives": [
+        "Set up a basic PennyLane quantum circuit",
+        "Apply single-qubit gates",
+        "Measure quantum states"
+      ],
+      "hints": [
+        "Start with importing pennylane as qml",
+        "Use qml.device() to create a quantum device",
+        "Remember to decorate your quantum function with @qml.qnode"
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.34,
+      "attempt_count": 1868,
+      "average_attempts_to_pass": 1.85,
+      "created_at": "2023-06-04T20:00:00Z",
+      "updated_at": "2023-06-18T20:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_002",
+      "title": "Returning Expectation Values",
+      "description": "Build a PennyLane circuit that returns the expectation value.",
+      "category": "Getting Started",
+      "difficulty": "Beginner",
+      "points": 75,
+      "tags": [
+        "expectation-values",
+        "measurements",
+        "observables"
+      ],
+      "learning_objectives": [
+        "Understand quantum expectation values",
+        "Use qml.expval() function",
+        "Work with Pauli observables"
+      ],
+      "hints": [
+        "Use qml.expval(qml.PauliZ(0)) to measure Z expectation",
+        "Remember that expectation values range from -1 to +1",
+        "Try different quantum states to see how expectation values change"
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.295,
+      "attempt_count": 4179,
+      "average_attempts_to_pass": 4.35,
+      "created_at": "2023-06-07T13:00:00Z",
+      "updated_at": "2023-08-18T13:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": [
+        "CHAL_001"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_003",
+      "title": "Returning Tensor Product Observables",
+      "description": "## Returning Tensor Product Observables\n\nReturn the expectation value of a 2-qubit observable.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Beginner` |\n| Points | **100** |\n| Est. time | 60 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Getting Started",
+      "difficulty": "Beginner",
+      "points": 100,
+      "tags": [
+        "tensor-products",
+        "multi-qubit",
+        "observables"
+      ],
+      "learning_objectives": [
+        "Construct tensor product observables",
+        "Measure multi-qubit expectation values",
+        "Understand qubit correlations"
+      ],
+      "hints": [
+        "Use @ operator for tensor products: qml.PauliZ(0) @ qml.PauliZ(1)",
+        "Tensor products allow measuring correlations between qubits",
+        "Try entangled states to see non-classical correlations"
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.296,
+      "attempt_count": 2318,
+      "average_attempts_to_pass": 5.47,
+      "created_at": "2023-06-10T20:00:00Z",
+      "updated_at": "2023-06-11T20:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": [
+        "CHAL_002",
+        "CHAL_001"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_004",
+      "title": "States and Probabilities",
+      "description": "Prepare a two-qubit state and measure output probabilities.",
+      "category": "Getting Started",
+      "difficulty": "Beginner",
+      "points": 100,
+      "tags": [
+        "probabilities",
+        "measurements",
+        "quantum-states"
+      ],
+      "learning_objectives": [
+        "Use qml.probs() to get measurement probabilities",
+        "Understand computational basis measurements",
+        "Prepare and measure multi-qubit states"
+      ],
+      "hints": [
+        "qml.probs() returns probabilities for all computational basis states",
+        "For 2 qubits, you get probabilities for |00\u27e9, |01\u27e9, |10\u27e9, |11\u27e9",
+        "Probabilities should always sum to 1"
+      ],
+      "status": "published",
+      "estimated_minutes": 30,
+      "completion_rate": 0.292,
+      "attempt_count": 2797,
+      "average_attempts_to_pass": 1.65,
+      "created_at": "2023-06-13T13:00:00Z",
+      "updated_at": "2023-08-01T13:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_003"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_005",
+      "title": "Certificate Challenge: Introduction to PennyLane",
+      "description": "## Overview\n\nTest your basics of PennyLane and earn a certificate.\n\n### Goals\n- Implement the core circuit for **Certificate Challenge: Introduction to PennyLane**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Getting Started",
+      "difficulty": "Intermediate",
+      "points": 200,
+      "tags": [
+        "certificate",
+        "comprehensive",
+        "assessment"
+      ],
+      "learning_objectives": [
+        "Demonstrate mastery of basic PennyLane concepts",
+        "Combine multiple quantum operations",
+        "Solve complex measurement problems"
+      ],
+      "hints": [
+        "Review all previous challenges",
+        "This covers circuits, measurements, and observables",
+        "Take your time - certificates require precision"
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.704,
+      "attempt_count": 1062,
+      "average_attempts_to_pass": 6.35,
+      "created_at": "2023-06-16T11:00:00Z",
+      "updated_at": "2023-08-04T11:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_004",
+        "CHAL_003"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_006",
+      "title": "Universality of Single-Qubit Gates",
+      "description": "## Overview\n\nCreate an arbitrary single-qubit gate using rotations.\n\n### Goals\n- Implement the core circuit for **Universality of Single-Qubit Gates**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Quantum Circuits",
+      "difficulty": "Beginner",
+      "points": 125,
+      "tags": [
+        "rotations",
+        "single-qubit",
+        "universality"
+      ],
+      "learning_objectives": [
+        "Understand Euler angle decomposition",
+        "Use RX, RY, RZ rotation gates",
+        "Implement arbitrary single-qubit unitaries"
+      ],
+      "hints": [
+        "Any single-qubit unitary can be written as RZ(\u03b1)RY(\u03b2)RZ(\u03b3)",
+        "Use qml.RY(), qml.RZ() for rotations",
+        "Angles are in radians"
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.828,
+      "attempt_count": 3002,
+      "average_attempts_to_pass": 4.22,
+      "created_at": "2023-06-19T09:00:00Z",
+      "updated_at": "2023-09-18T09:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_007",
+      "title": "Mid-Circuit Measurements",
+      "description": "### Challenge brief\n\nConstruct a circuit with mid-circuit measurements.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`mid-circuit, measurements, conditional`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Quantum Circuits",
+      "difficulty": "Beginner",
+      "points": 150,
+      "tags": [
+        "mid-circuit",
+        "measurements",
+        "conditional"
+      ],
+      "learning_objectives": [
+        "Perform measurements during circuit execution",
+        "Use measurement results for conditional operations",
+        "Understand quantum-classical interfaces"
+      ],
+      "hints": [
+        "Use qml.measure() for mid-circuit measurements",
+        "Store measurement results in classical variables",
+        "Use qml.cond() for conditional quantum operations"
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.804,
+      "attempt_count": 867,
+      "average_attempts_to_pass": 3.15,
+      "created_at": "2023-06-22T07:00:00Z",
+      "updated_at": "2023-08-20T07:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_008",
+      "title": "My First Quantum Simulation",
+      "description": "## My First Quantum Simulation\n\nBuild a toy version of PennyLane using numpy.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Beginner` |\n| Points | **175** |\n| Est. time | 120 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Quantum Circuits",
+      "difficulty": "Beginner",
+      "points": 175,
+      "tags": [
+        "simulation",
+        "numpy",
+        "implementation"
+      ],
+      "learning_objectives": [
+        "Understand quantum state vector representation",
+        "Implement basic quantum gates as matrices",
+        "Simulate quantum circuits with classical computation"
+      ],
+      "hints": [
+        "Quantum states are complex vectors of length 2^n",
+        "Gates are unitary matrices that multiply state vectors",
+        "Use numpy.kron() for tensor products"
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.334,
+      "attempt_count": 624,
+      "average_attempts_to_pass": 4.39,
+      "created_at": "2023-06-25T11:00:00Z",
+      "updated_at": "2023-07-17T11:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_009",
+      "title": "The Parameter-Shift Rule",
+      "description": "## Overview\n\nCalculate the gradient of a variational circuit.\n\n### Goals\n- Implement the core circuit for **The Parameter-Shift Rule**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Optimization",
+      "difficulty": "Beginner",
+      "points": 125,
+      "tags": [
+        "gradients",
+        "parameter-shift",
+        "optimization"
+      ],
+      "learning_objectives": [
+        "Understand quantum parameter gradients",
+        "Implement the parameter-shift rule",
+        "Calculate derivatives of quantum expectation values"
+      ],
+      "hints": [
+        "Parameter-shift rule: \u2202\u27e8H\u27e9/\u2202\u03b8 = (\u27e8H\u27e9_{\u03b8+\u03c0/2} - \u27e8H\u27e9_{\u03b8-\u03c0/2})/2",
+        "Use qml.grad() for automatic differentiation",
+        "Works for gates with two distinct eigenvalues"
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.671,
+      "attempt_count": 1839,
+      "average_attempts_to_pass": 4.8,
+      "created_at": "2023-06-28T14:00:00Z",
+      "updated_at": "2023-10-14T14:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_010",
+      "title": "The Hessian of a Circuit",
+      "description": "## Overview\n\nUse the parameter-shift rule to calculate the Hessian.\n\n### Goals\n- Implement the core circuit for **The Hessian of a Circuit**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Optimization",
+      "difficulty": "Beginner",
+      "points": 150,
+      "tags": [
+        "hessian",
+        "second-derivatives",
+        "optimization"
+      ],
+      "learning_objectives": [
+        "Calculate second-order derivatives",
+        "Understand Hessian matrices for quantum circuits",
+        "Apply parameter-shift to higher derivatives"
+      ],
+      "hints": [
+        "Hessian is matrix of second partial derivatives",
+        "Apply parameter-shift rule twice",
+        "Use qml.metric_tensor() for quantum Fisher information"
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.334,
+      "attempt_count": 1768,
+      "average_attempts_to_pass": 6.03,
+      "created_at": "2023-07-01T01:00:00Z",
+      "updated_at": "2023-09-12T01:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_011",
+      "title": "Keeping Expectations Low",
+      "description": "### Challenge brief\n\nUse an optimization routine to minimize an expectation value.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`minimization, optimizers, vqe`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Optimization",
+      "difficulty": "Beginner",
+      "points": 175,
+      "tags": [
+        "minimization",
+        "optimizers",
+        "vqe"
+      ],
+      "learning_objectives": [
+        "Set up optimization problems for quantum circuits",
+        "Use classical optimizers with quantum gradients",
+        "Find ground states through variational methods"
+      ],
+      "hints": [
+        "Use qml.GradientDescentOptimizer or qml.AdamOptimizer",
+        "Start with small learning rates",
+        "Monitor convergence by tracking cost function"
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.487,
+      "attempt_count": 2209,
+      "average_attempts_to_pass": 1.85,
+      "created_at": "2023-07-04T20:00:00Z",
+      "updated_at": "2023-10-08T20:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_010",
+        "CHAL_009"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_012",
+      "title": "A Simple Trotterization",
+      "description": "Implement the unitary evolution of a Hamiltonian.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Hamiltonians",
+      "difficulty": "Beginner",
+      "points": 150,
+      "tags": [
+        "trotterization",
+        "time-evolution",
+        "hamiltonians"
+      ],
+      "learning_objectives": [
+        "Understand Trotter-Suzuki decomposition",
+        "Implement time evolution operators",
+        "Approximate non-commuting Hamiltonians"
+      ],
+      "hints": [
+        "e^{i(A+B)t} \u2248 (e^{iAt/n}e^{iBt/n})^n for large n",
+        "Use qml.ApproxTimeEvolution for built-in Trotterization",
+        "Smaller time steps give better approximations"
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.44,
+      "attempt_count": 1836,
+      "average_attempts_to_pass": 6.49,
+      "created_at": "2023-07-07T18:00:00Z",
+      "updated_at": "2023-07-25T18:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_013",
+      "title": "Hamiltonians and Operator Arithmetic",
+      "description": "## Hamiltonians and Operator Arithmetic\n\nCreate a given Hamiltonian using operator arithmetic.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Intermediate` |\n| Points | **200** |\n| Est. time | 30 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Hamiltonians",
+      "difficulty": "Intermediate",
+      "points": 200,
+      "tags": [
+        "hamiltonians",
+        "operators",
+        "arithmetic"
+      ],
+      "learning_objectives": [
+        "Construct complex Hamiltonians from basic operators",
+        "Use qml.Hamiltonian for operator arithmetic",
+        "Understand quantum many-body systems"
+      ],
+      "hints": [
+        "Use qml.Hamiltonian(coeffs, observables) constructor",
+        "Combine Pauli strings with coefficients",
+        "Check Hamiltonian properties like hermiticity"
+      ],
+      "status": "draft",
+      "estimated_minutes": 30,
+      "completion_rate": 0.622,
+      "attempt_count": 3498,
+      "average_attempts_to_pass": 4.32,
+      "created_at": "2023-07-10T01:00:00Z",
+      "updated_at": "2023-08-29T01:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_012",
+        "CHAL_011"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_014",
+      "title": "Hydro Bonding",
+      "description": "### Challenge brief\n\nCalculate the ground energy of a Hydrogen molecule.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`chemistry, vqe, molecules`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Quantum Chemistry",
+      "difficulty": "Beginner",
+      "points": 200,
+      "tags": [
+        "chemistry",
+        "vqe",
+        "molecules"
+      ],
+      "learning_objectives": [
+        "Set up molecular Hamiltonian for H2",
+        "Use VQE to find molecular ground states",
+        "Understand quantum chemistry applications"
+      ],
+      "hints": [
+        "Use qml.qchem.molecular_hamiltonian() for H2",
+        "Try UCCSD ansatz for chemistry problems",
+        "Ground state energy should be around -1.137 Hartree"
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.809,
+      "attempt_count": 134,
+      "average_attempts_to_pass": 4.77,
+      "created_at": "2023-07-13T14:00:00Z",
+      "updated_at": "2023-07-28T14:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_013",
+        "CHAL_012"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_015",
+      "title": "Ising Uprising",
+      "description": "Use the VQE on the Transverse Ising Model.",
+      "category": "Quantum Chemistry",
+      "difficulty": "Intermediate",
+      "points": 250,
+      "tags": [
+        "ising-model",
+        "vqe",
+        "phase-transitions"
+      ],
+      "learning_objectives": [
+        "Implement transverse field Ising model",
+        "Study quantum phase transitions",
+        "Use VQE for many-body physics"
+      ],
+      "hints": [
+        "TFIM Hamiltonian: H = -J\u2211ZZ - h\u2211X",
+        "Try different transverse field strengths",
+        "Look for quantum phase transition around h/J = 1"
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.247,
+      "attempt_count": 66,
+      "average_attempts_to_pass": 6.25,
+      "created_at": "2023-07-16T10:00:00Z",
+      "updated_at": "2023-11-06T10:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_014",
+        "CHAL_013"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_016",
+      "title": "Introduction to LCUs",
+      "description": "## Introduction to LCUs\n\nApply a non-unitary operator to a quantum state.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Beginner` |\n| Points | **175** |\n| Est. time | 15 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Algorithms",
+      "difficulty": "Beginner",
+      "points": 175,
+      "tags": [
+        "lcu",
+        "linear-combination",
+        "non-unitary"
+      ],
+      "learning_objectives": [
+        "Understand Linear Combination of Unitaries",
+        "Implement non-unitary operations probabilistically",
+        "Use ancilla qubits for quantum algorithms"
+      ],
+      "hints": [
+        "LCU decomposes non-unitary operators as weighted sum of unitaries",
+        "Use ancilla qubits to control which unitary is applied",
+        "Success probability depends on the weights"
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.816,
+      "attempt_count": 2484,
+      "average_attempts_to_pass": 5.65,
+      "created_at": "2023-07-19T05:00:00Z",
+      "updated_at": "2023-09-22T05:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_017",
+      "title": "Reaching for the Ratio",
+      "description": "Optimize the efficiency of your QAOA routine.",
+      "category": "Algorithms",
+      "difficulty": "Advanced",
+      "points": 300,
+      "tags": [
+        "qaoa",
+        "optimization",
+        "approximation-ratio"
+      ],
+      "learning_objectives": [
+        "Implement Quantum Approximate Optimization Algorithm",
+        "Optimize QAOA parameters for best performance",
+        "Understand approximation ratios for combinatorial problems"
+      ],
+      "hints": [
+        "QAOA alternates between problem and mixer Hamiltonians",
+        "Use classical optimization to find best angle parameters",
+        "Higher p (more layers) generally gives better approximation ratios"
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.883,
+      "attempt_count": 44,
+      "average_attempts_to_pass": 4.33,
+      "created_at": "2023-07-22T11:00:00Z",
+      "updated_at": "2023-09-23T11:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_018",
+      "title": "The False Proof",
+      "description": "### Challenge brief\n\nUse a quantum circuit to debunk a flawed proof.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`verification, proof-checking, oracles`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Algorithms",
+      "difficulty": "Advanced",
+      "points": 350,
+      "tags": [
+        "verification",
+        "proof-checking",
+        "oracles"
+      ],
+      "learning_objectives": [
+        "Implement quantum verification algorithms",
+        "Use quantum circuits to check mathematical proofs",
+        "Understand quantum advantage in verification"
+      ],
+      "hints": [
+        "Quantum circuits can verify some proofs exponentially faster",
+        "Use oracle functions to encode the proof structure",
+        "Look for quantum interference to detect errors"
+      ],
+      "status": "draft",
+      "estimated_minutes": 45,
+      "completion_rate": 0.312,
+      "attempt_count": 2013,
+      "average_attempts_to_pass": 5.84,
+      "created_at": "2023-07-25T11:00:00Z",
+      "updated_at": "2023-08-05T11:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_017",
+        "CHAL_016"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_019",
+      "title": "A Shor Thing",
+      "description": "## Overview\n\nProgram Shor's 9-qubit code.\n\n### Goals\n- Implement the core circuit for **A Shor Thing**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Error Correction",
+      "difficulty": "Beginner",
+      "points": 225,
+      "tags": [
+        "error-correction",
+        "shor-code",
+        "stabilizers"
+      ],
+      "learning_objectives": [
+        "Implement Shor's 9-qubit quantum error correcting code",
+        "Understand stabilizer formalism",
+        "Correct both bit-flip and phase-flip errors"
+      ],
+      "hints": [
+        "Shor's code protects against arbitrary single-qubit errors",
+        "Uses 3 qubits to correct bit flips, 3 codes to correct phase flips",
+        "Measure stabilizer generators to detect errors"
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.733,
+      "attempt_count": 1091,
+      "average_attempts_to_pass": 4.66,
+      "created_at": "2023-07-28T15:00:00Z",
+      "updated_at": "2023-10-07T15:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": [
+        "CHAL_018"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_020",
+      "title": "Changing Qubits",
+      "description": "## Changing Qubits\n\nRoute a quantum state through the virus-ridden channel.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Advanced` |\n| Points | **400** |\n| Est. time | 60 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Error Correction",
+      "difficulty": "Advanced",
+      "points": 400,
+      "tags": [
+        "error-correction",
+        "noisy-channels",
+        "decoding"
+      ],
+      "learning_objectives": [
+        "Navigate quantum states through noisy environments",
+        "Implement error correction in realistic noise models",
+        "Understand quantum channel capacity"
+      ],
+      "hints": [
+        "Model noise as quantum channels (depolarizing, amplitude damping)",
+        "Use error correction codes to protect information",
+        "Optimize encoding/decoding for the specific noise model"
+      ],
+      "status": "draft",
+      "estimated_minutes": 60,
+      "completion_rate": 0.891,
+      "attempt_count": 1687,
+      "average_attempts_to_pass": 4.95,
+      "created_at": "2023-07-31T16:00:00Z",
+      "updated_at": "2023-09-21T16:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_019"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_021",
+      "title": "Don't Hit the Ground",
+      "description": "### Challenge brief\n\nCalculate the half-life of an excited state.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`decay, half-life, dynamics`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Quantum Information",
+      "difficulty": "Intermediate",
+      "points": 200,
+      "tags": [
+        "decay",
+        "half-life",
+        "dynamics"
+      ],
+      "learning_objectives": [
+        "Model quantum state decay processes",
+        "Calculate excited state lifetimes",
+        "Understand open quantum systems"
+      ],
+      "hints": [
+        "Excited states decay exponentially: |\u03c8(t)|\u00b2 \u221d e^{-\u03b3t}",
+        "Half-life is t\u2081/\u2082 = ln(2)/\u03b3 where \u03b3 is decay rate",
+        "Use qml.AmplitudeDamping to model decay"
+      ],
+      "status": "published",
+      "estimated_minutes": 30,
+      "completion_rate": 0.3,
+      "attempt_count": 2809,
+      "average_attempts_to_pass": 1.21,
+      "created_at": "2023-08-03T16:00:00Z",
+      "updated_at": "2023-10-13T16:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": [
+        "CHAL_020",
+        "CHAL_019"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_022",
+      "title": "Quantum State Discrimination",
+      "description": "Distinguish two qubit states using one measurement.\n\n**Difficulty focus:** Intermediate \u00b7 **Category:** Quantum Information\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Quantum Information",
+      "difficulty": "Intermediate",
+      "points": "225",
+      "tags": [
+        "discrimination",
+        "measurements",
+        "information"
+      ],
+      "learning_objectives": [
+        "Implement optimal quantum state discrimination",
+        "Understand measurement strategies for unknown states",
+        "Calculate discrimination probabilities"
+      ],
+      "hints": [
+        "Optimal discrimination uses projective measurements",
+        "Success probability depends on state overlap",
+        "For orthogonal states, perfect discrimination is possible"
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.625,
+      "attempt_count": 1915,
+      "average_attempts_to_pass": 1.46,
+      "created_at": "2023-08-06T07:00:00Z",
+      "updated_at": "2023-08-11T07:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_023",
+      "title": "An Itch to Switch",
+      "description": "Switch basis state qubits with your friend.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Quantum Information",
+      "difficulty": "Advanced",
+      "points": 300,
+      "tags": [
+        "swapping",
+        "entanglement",
+        "protocols"
+      ],
+      "learning_objectives": [
+        "Implement quantum state swapping protocols",
+        "Use entanglement for quantum communication",
+        "Understand quantum teleportation variants"
+      ],
+      "hints": [
+        "Quantum SWAP gate exchanges the states of two qubits",
+        "Can be implemented using three CNOT gates",
+        "Consider using entanglement for remote swapping"
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.508,
+      "attempt_count": 1123,
+      "average_attempts_to_pass": 5.01,
+      "created_at": "2023-08-09T16:00:00Z",
+      "updated_at": "2023-11-30T16:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_024",
+      "title": "The Super Parameter",
+      "description": "## Overview\n\nExplore the concept of expressivity in QML.\n\n### Goals\n- Implement the core circuit for **The Super Parameter**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Quantum Machine Learning",
+      "difficulty": "Intermediate",
+      "points": 275,
+      "tags": [
+        "qml",
+        "expressivity",
+        "parameters"
+      ],
+      "learning_objectives": [
+        "Understand quantum machine learning expressivity",
+        "Measure circuit expressibility and entangling capability",
+        "Compare different ansatz architectures"
+      ],
+      "hints": [
+        "Expressivity measures how much of Hilbert space circuit can explore",
+        "Use metrics like effective dimension or Fisher information",
+        "More parameters doesn't always mean better expressivity"
+      ],
+      "status": "published",
+      "estimated_minutes": 30,
+      "completion_rate": 0.195,
+      "attempt_count": 3571,
+      "average_attempts_to_pass": 3.01,
+      "created_at": "2023-08-12T15:00:00Z",
+      "updated_at": "2023-10-04T15:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_023",
+        "CHAL_022"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_025",
+      "title": "Noisy QAOA",
+      "description": "## Noisy QAOA\n\nFind the approximation ratio of a noisy QAOA circuit.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Advanced` |\n| Points | **350** |\n| Est. time | 120 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Algorithms",
+      "difficulty": "Advanced",
+      "points": 350,
+      "tags": [
+        "qaoa",
+        "noise",
+        "nisq"
+      ],
+      "learning_objectives": [
+        "Study QAOA performance under realistic noise",
+        "Implement error mitigation techniques",
+        "Understand NISQ algorithm limitations"
+      ],
+      "hints": [
+        "Add noise channels after each gate operation",
+        "Try error mitigation like zero-noise extrapolation",
+        "Shorter circuits are more robust to noise"
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.199,
+      "attempt_count": 3338,
+      "average_attempts_to_pass": 5.03,
+      "created_at": "2023-08-15T01:00:00Z",
+      "updated_at": "2023-11-26T01:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_026",
+      "title": "Counting Mountains",
+      "description": "## Overview\n\nCount peaks and valleys using quantum circuits.\n\n### Goals\n- Implement the core circuit for **Counting Mountains**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Algorithms",
+      "difficulty": "Advanced",
+      "points": 375,
+      "tags": [
+        "counting",
+        "oracles",
+        "amplitude-amplification"
+      ],
+      "learning_objectives": [
+        "Implement quantum counting algorithms",
+        "Use amplitude amplification for search problems",
+        "Count solutions to optimization problems"
+      ],
+      "hints": [
+        "Quantum counting uses quantum Fourier transform",
+        "Amplitude amplification generalizes Grover's algorithm",
+        "Can count solutions without finding them explicitly"
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.232,
+      "attempt_count": 1543,
+      "average_attempts_to_pass": 2.6,
+      "created_at": "2023-08-18T06:00:00Z",
+      "updated_at": "2023-09-19T06:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_025"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_027",
+      "title": "A Noisy Heisenberg Model",
+      "description": "Simulate the Heisenberg Hamiltonian with added noise.\n\n**Difficulty focus:** Advanced \u00b7 **Category:** Hamiltonians\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Hamiltonians",
+      "difficulty": "Advanced",
+      "points": 325,
+      "tags": [
+        "heisenberg",
+        "noise",
+        "many-body"
+      ],
+      "learning_objectives": [
+        "Simulate noisy many-body quantum systems",
+        "Understand decoherence effects on quantum magnetism",
+        "Compare ideal vs realistic quantum simulations"
+      ],
+      "hints": [
+        "Heisenberg model: H = J\u2211(X\u2297X + Y\u2297Y + Z\u2297Z)",
+        "Add decoherence during time evolution",
+        "Observe how noise affects quantum correlations"
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.919,
+      "attempt_count": 160,
+      "average_attempts_to_pass": 6.33,
+      "created_at": "2023-08-21T17:00:00Z",
+      "updated_at": "2023-12-18T17:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_028",
+      "title": "Secrets in Spacetime",
+      "description": "### Challenge brief\n\nDevelop a method to test a noisy encrypter.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`cryptography, testing, protocols`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Optimization",
+      "difficulty": "Intermediate",
+      "points": 250,
+      "tags": [
+        "cryptography",
+        "testing",
+        "protocols"
+      ],
+      "learning_objectives": [
+        "Design quantum cryptographic protocols",
+        "Test quantum encryption under noise",
+        "Understand quantum key distribution security"
+      ],
+      "hints": [
+        "Use quantum state discrimination to test encryption quality",
+        "Eavesdropping introduces detectable disturbances",
+        "Perfect encryption makes all outputs look random"
+      ],
+      "status": "published",
+      "estimated_minutes": 30,
+      "completion_rate": 0.812,
+      "attempt_count": 520,
+      "average_attempts_to_pass": 1.99,
+      "created_at": "2023-08-24T13:00:00Z",
+      "updated_at": "2023-08-25T13:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_027"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_029",
+      "title": "Revisiting Schrodinger's Cat",
+      "description": "Design an experiment to make a zombie cat.\n\n**Difficulty focus:** Intermediate \u00b7 **Category:** Optimization\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Optimization",
+      "difficulty": "Intermediate",
+      "points": 225,
+      "tags": [
+        "superposition",
+        "measurement",
+        "decoherence"
+      ],
+      "learning_objectives": [
+        "Create and maintain quantum superposition states",
+        "Understand measurement-induced state collapse",
+        "Design experiments with macroscopic quantum effects"
+      ],
+      "hints": [
+        "Schr\u00f6dinger's cat is a superposition of alive and dead states",
+        "Zombie cat might be a coherent mixture of states",
+        "Use quantum error correction to protect superposition"
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.886,
+      "attempt_count": 4026,
+      "average_attempts_to_pass": 1.94,
+      "created_at": "2023-08-27T14:00:00Z",
+      "updated_at": "2023-10-04T14:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_030",
+      "title": "A Pauli-Worded Problem",
+      "description": "Identify a state from noisy copies of it.\n\n**Difficulty focus:** Intermediate \u00b7 **Category:** Quantum Information\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Quantum Information",
+      "difficulty": "Intermediate",
+      "points": 250,
+      "tags": [
+        "state-tomography",
+        "pauli",
+        "reconstruction"
+      ],
+      "learning_objectives": [
+        "Perform quantum state tomography",
+        "Reconstruct quantum states from measurement data",
+        "Handle noise in state reconstruction"
+      ],
+      "hints": [
+        "Measure in Pauli X, Y, Z bases to reconstruct state",
+        "Use maximum likelihood estimation for noisy data",
+        "Need at least 3^n measurements for n-qubit tomography"
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.718,
+      "attempt_count": 508,
+      "average_attempts_to_pass": 1.37,
+      "created_at": "2023-08-30T18:00:00Z",
+      "updated_at": "2023-10-31T18:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_031",
+      "title": "Understanding Shot Noise In Practice",
+      "description": "## Understanding Shot Noise In Practice\n\nBuild and validate a PennyLane workflow focused on shot noise.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Beginner` |\n| Points | **50** |\n| Est. time | 90 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Compilation",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "measurements",
+        "vqe",
+        "plugins"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to shot noise",
+        "Measure and interpret results for shot noise",
+        "Debug common failure modes in shot noise"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.186,
+      "attempt_count": 2631,
+      "average_attempts_to_pass": 6.15,
+      "created_at": "2023-09-02T18:00:00Z",
+      "updated_at": "2023-09-29T18:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_032",
+      "title": "Hands-On Vqe",
+      "description": "## Hands-On Vqe\n\nBuild and validate a PennyLane workflow focused on VQE.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Intermediate` |\n| Points | **150** |\n| Est. time | 15 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Hamiltonians",
+      "difficulty": "Intermediate",
+      "points": 150,
+      "tags": [
+        "basics",
+        "hamiltonian"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to VQE",
+        "Measure and interpret results for VQE",
+        "Debug common failure modes in VQE"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "archived",
+      "estimated_minutes": 15,
+      "completion_rate": 0.179,
+      "attempt_count": 1786,
+      "average_attempts_to_pass": 3.83,
+      "created_at": "2023-09-05T19:00:00Z",
+      "updated_at": "2023-09-22T19:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_033",
+      "title": "Intro To Qaoa",
+      "description": "## Intro To Qaoa\n\nBuild and validate a PennyLane workflow focused on QAOA.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Intermediate` |\n| Points | **100** |\n| Est. time | 30 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Photonics",
+      "difficulty": "Intermediate",
+      "points": 100,
+      "tags": [
+        "compilation",
+        "gpu"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to QAOA",
+        "Measure and interpret results for QAOA",
+        "Debug common failure modes in QAOA"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "draft",
+      "estimated_minutes": 30,
+      "completion_rate": 0.332,
+      "attempt_count": 916,
+      "average_attempts_to_pass": 5.11,
+      "created_at": "2023-09-08T03:00:00Z",
+      "updated_at": "2023-09-28T03:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_032"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_034",
+      "title": "Certificate Track \u2014 Hybrid Classical Loops",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on hybrid classical loops.\n\n### Goals\n- Implement the core circuit for **Certificate Track \u2014 Hybrid Classical Loops**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Quantum Machine Learning",
+      "difficulty": "Beginner",
+      "points": 75,
+      "tags": [
+        "lightning",
+        "qnode",
+        "gradients",
+        "ansatz",
+        "performance"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to hybrid classical loops",
+        "Measure and interpret results for hybrid classical loops",
+        "Debug common failure modes in hybrid classical loops"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 30,
+      "completion_rate": 0.63,
+      "attempt_count": 2185,
+      "average_attempts_to_pass": 1.97,
+      "created_at": "2023-09-11T01:00:00Z",
+      "updated_at": "2023-11-07T01:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_033",
+        "CHAL_032"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_035",
+      "title": "Variational Circuits: From Theory To Circuit",
+      "description": "Build and validate a PennyLane workflow focused on variational circuits.",
+      "category": "Hamiltonians",
+      "difficulty": "Beginner",
+      "points": 100,
+      "tags": [
+        "ansatz",
+        "qml",
+        "qnode"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to variational circuits",
+        "Measure and interpret results for variational circuits",
+        "Debug common failure modes in variational circuits"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.839,
+      "attempt_count": 1760,
+      "average_attempts_to_pass": 4.78,
+      "created_at": "2023-09-14T09:00:00Z",
+      "updated_at": "2023-12-09T09:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_034"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_036",
+      "title": "Resource Estimation: From Theory To Circuit",
+      "description": "Build and validate a PennyLane workflow focused on resource estimation.\n\n**Difficulty focus:** Advanced \u00b7 **Category:** Algorithms\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Algorithms",
+      "difficulty": "Advanced",
+      "points": 175,
+      "tags": [
+        "ansatz",
+        "basics",
+        "optimization"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to resource estimation",
+        "Measure and interpret results for resource estimation",
+        "Debug common failure modes in resource estimation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.762,
+      "attempt_count": 2072,
+      "average_attempts_to_pass": 2.54,
+      "created_at": "2023-09-17T10:00:00Z",
+      "updated_at": "2023-12-27T10:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_035"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_037",
+      "title": "Certificate Track \u2014 Expectation Values",
+      "description": "## Certificate Track \u2014 Expectation Values\n\nBuild and validate a PennyLane workflow focused on expectation values.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Advanced` |\n| Points | **150** |\n| Est. time | 15 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Hamiltonians",
+      "difficulty": "Advanced",
+      "points": 150,
+      "tags": [
+        "plugins",
+        "performance",
+        "basics",
+        "devices"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to expectation values",
+        "Measure and interpret results for expectation values",
+        "Debug common failure modes in expectation values"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.894,
+      "attempt_count": 2326,
+      "average_attempts_to_pass": 3.0,
+      "created_at": "2023-09-20T12:00:00Z",
+      "updated_at": "2023-11-25T12:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_036",
+        "CHAL_035"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_038",
+      "title": "Understanding Resource Estimation In Practice",
+      "description": "## Understanding Resource Estimation In Practice\n\nBuild and validate a PennyLane workflow focused on resource estimation.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Beginner` |\n| Points | **50** |\n| Est. time | 90 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Algorithms",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "qnode",
+        "vqe",
+        "ansatz",
+        "observables"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to resource estimation",
+        "Measure and interpret results for resource estimation",
+        "Debug common failure modes in resource estimation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.213,
+      "attempt_count": 1597,
+      "average_attempts_to_pass": 2.48,
+      "created_at": "2023-09-23T10:00:00Z",
+      "updated_at": "2023-12-23T10:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_039",
+      "title": "Certificate Track \u2014 Shot Noise",
+      "description": "Build and validate a PennyLane workflow focused on shot noise.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Quantum Chemistry",
+      "difficulty": "Expert",
+      "points": 300,
+      "tags": [
+        "error-mitigation",
+        "performance"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to shot noise",
+        "Measure and interpret results for shot noise",
+        "Debug common failure modes in shot noise"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 45,
+      "completion_rate": 0.526,
+      "attempt_count": 3385,
+      "average_attempts_to_pass": 2.86,
+      "created_at": "2023-09-26T03:00:00Z",
+      "updated_at": "2023-12-25T03:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_038",
+        "CHAL_037"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_040",
+      "title": "Scaling Hamiltonian Simulation With Pennylane",
+      "description": "### Challenge brief\n\nBuild and validate a PennyLane workflow focused on Hamiltonian simulation.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`measurements, compilation, basics, gpu`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Photonics",
+      "difficulty": "Beginner",
+      "points": 100,
+      "tags": [
+        "measurements",
+        "compilation",
+        "basics",
+        "gpu"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to Hamiltonian simulation",
+        "Measure and interpret results for Hamiltonian simulation",
+        "Debug common failure modes in Hamiltonian simulation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.605,
+      "attempt_count": 2679,
+      "average_attempts_to_pass": 3.61,
+      "created_at": "2023-09-29T09:00:00Z",
+      "updated_at": "2023-11-25T09:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": [
+        "CHAL_039",
+        "CHAL_038"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_041",
+      "title": "Entangling Layers: From Theory To Circuit",
+      "description": "Build and validate a PennyLane workflow focused on entangling layers.",
+      "category": "Quantum Circuits",
+      "difficulty": "Advanced",
+      "points": 200,
+      "tags": [
+        "gradients",
+        "plugins",
+        "gpu",
+        "debugging"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to entangling layers",
+        "Measure and interpret results for entangling layers",
+        "Debug common failure modes in entangling layers"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.316,
+      "attempt_count": 3932,
+      "average_attempts_to_pass": 4.4,
+      "created_at": "2023-10-02T06:00:00Z",
+      "updated_at": "2024-01-09T06:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_040"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_042",
+      "title": "Certificate Track \u2014 Jit Compilation",
+      "description": "Build and validate a PennyLane workflow focused on JIT compilation.\n\n**Difficulty focus:** Advanced \u00b7 **Category:** Error Correction\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Error Correction",
+      "difficulty": "Advanced",
+      "points": 200,
+      "tags": [
+        "plugins",
+        "qml",
+        "basics",
+        "vqe",
+        "ansatz"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to JIT compilation",
+        "Measure and interpret results for JIT compilation",
+        "Debug common failure modes in JIT compilation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.534,
+      "attempt_count": 451,
+      "average_attempts_to_pass": 4.11,
+      "created_at": "2023-10-05T07:00:00Z",
+      "updated_at": "2024-01-31T07:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_041"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_043",
+      "title": "Debugging Hamiltonian Simulation Workflows",
+      "description": "## Debugging Hamiltonian Simulation Workflows\n\nBuild and validate a PennyLane workflow focused on Hamiltonian simulation.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Advanced` |\n| Points | **200** |\n| Est. time | 120 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Photonics",
+      "difficulty": "Advanced",
+      "points": 200,
+      "tags": [
+        "compilation",
+        "hamiltonian",
+        "optimization",
+        "chemistry",
+        "debugging"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to Hamiltonian simulation",
+        "Measure and interpret results for Hamiltonian simulation",
+        "Debug common failure modes in Hamiltonian simulation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.342,
+      "attempt_count": 4009,
+      "average_attempts_to_pass": 4.48,
+      "created_at": "2023-10-08T08:00:00Z",
+      "updated_at": "2023-11-13T08:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_044",
+      "title": "Debugging Tensor Networks Workflows",
+      "description": "Build and validate a PennyLane workflow focused on tensor networks.",
+      "category": "Algorithms",
+      "difficulty": "Beginner",
+      "points": 75,
+      "tags": [
+        "plugins",
+        "measurements",
+        "qml"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to tensor networks",
+        "Measure and interpret results for tensor networks",
+        "Debug common failure modes in tensor networks"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.385,
+      "attempt_count": 3856,
+      "average_attempts_to_pass": 3.35,
+      "created_at": "2023-10-11T06:00:00Z",
+      "updated_at": "2023-11-07T06:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_043"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_045",
+      "title": "Scaling Custom Operations With Pennylane",
+      "description": "Build and validate a PennyLane workflow focused on custom operations.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Getting Started",
+      "difficulty": "Expert",
+      "points": 250,
+      "tags": [
+        "gpu",
+        "measurements",
+        "ansatz",
+        "plugins"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to custom operations",
+        "Measure and interpret results for custom operations",
+        "Debug common failure modes in custom operations"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.509,
+      "attempt_count": 3225,
+      "average_attempts_to_pass": 2.92,
+      "created_at": "2023-10-14T15:00:00Z",
+      "updated_at": "2024-01-09T15:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_044",
+        "CHAL_043"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_046",
+      "title": "Optimizing For Error Mitigation",
+      "description": "### Challenge brief\n\nBuild and validate a PennyLane workflow focused on error mitigation.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`gradients, ansatz`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Photonics",
+      "difficulty": "Advanced",
+      "points": 150,
+      "tags": [
+        "gradients",
+        "ansatz"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to error mitigation",
+        "Measure and interpret results for error mitigation",
+        "Debug common failure modes in error mitigation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "draft",
+      "estimated_minutes": 30,
+      "completion_rate": 0.16,
+      "attempt_count": 3145,
+      "average_attempts_to_pass": 2.87,
+      "created_at": "2023-10-17T04:00:00Z",
+      "updated_at": "2023-12-15T04:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_045"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_047",
+      "title": "Hands-On Photonic Cv",
+      "description": "## Hands-On Photonic Cv\n\nBuild and validate a PennyLane workflow focused on photonic CV.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Beginner` |\n| Points | **75** |\n| Est. time | 15 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Error Correction",
+      "difficulty": "Beginner",
+      "points": 75,
+      "tags": [
+        "compilation",
+        "qnode"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to photonic CV",
+        "Measure and interpret results for photonic CV",
+        "Debug common failure modes in photonic CV"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.745,
+      "attempt_count": 369,
+      "average_attempts_to_pass": 5.17,
+      "created_at": "2023-10-20T11:00:00Z",
+      "updated_at": "2023-11-21T11:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_048",
+      "title": "Intro To Hybrid Classical Loops",
+      "description": "### Challenge brief\n\nBuild and validate a PennyLane workflow focused on hybrid classical loops.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`hamiltonian, lightning, observables`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Photonics",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "hamiltonian",
+        "lightning",
+        "observables"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to hybrid classical loops",
+        "Measure and interpret results for hybrid classical loops",
+        "Debug common failure modes in hybrid classical loops"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.695,
+      "attempt_count": 1381,
+      "average_attempts_to_pass": 6.31,
+      "created_at": "2023-10-23T05:00:00Z",
+      "updated_at": "2023-11-06T05:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_047"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_049",
+      "title": "Scaling Custom Operations With Pennylane",
+      "description": "## Scaling Custom Operations With Pennylane\n\nBuild and validate a PennyLane workflow focused on custom operations.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Advanced` |\n| Points | **175** |\n| Est. time | 45 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Optimization",
+      "difficulty": "Advanced",
+      "points": 175,
+      "tags": [
+        "vqe",
+        "gpu",
+        "performance"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to custom operations",
+        "Measure and interpret results for custom operations",
+        "Debug common failure modes in custom operations"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 45,
+      "completion_rate": 0.546,
+      "attempt_count": 3075,
+      "average_attempts_to_pass": 1.47,
+      "created_at": "2023-10-26T18:00:00Z",
+      "updated_at": "2024-01-17T18:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_050",
+      "title": "Scaling Jit Compilation With Pennylane",
+      "description": "Build and validate a PennyLane workflow focused on JIT compilation.\n\n**Difficulty focus:** Advanced \u00b7 **Category:** Compilation\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Compilation",
+      "difficulty": "Advanced",
+      "points": 150,
+      "tags": [
+        "qml",
+        "ansatz",
+        "optimization",
+        "photonics",
+        "lightning"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to JIT compilation",
+        "Measure and interpret results for JIT compilation",
+        "Debug common failure modes in JIT compilation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.74,
+      "attempt_count": 3848,
+      "average_attempts_to_pass": 3.45,
+      "created_at": "2023-10-29T19:00:00Z",
+      "updated_at": "2024-01-31T19:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_049"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_051",
+      "title": "Hands-On Qaoa",
+      "description": "Build and validate a PennyLane workflow focused on QAOA.\n\n**Difficulty focus:** Advanced \u00b7 **Category:** Quantum Information\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Quantum Information",
+      "difficulty": "Advanced",
+      "points": 150,
+      "tags": [
+        "debugging",
+        "measurements",
+        "error-mitigation",
+        "basics",
+        "chemistry"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to QAOA",
+        "Measure and interpret results for QAOA",
+        "Debug common failure modes in QAOA"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 30,
+      "completion_rate": 0.404,
+      "attempt_count": 2156,
+      "average_attempts_to_pass": 2.94,
+      "created_at": "2023-11-01T10:00:00Z",
+      "updated_at": "2024-02-22T10:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_050",
+        "CHAL_049"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_052",
+      "title": "Understanding Variational Circuits In Practice",
+      "description": "Build and validate a PennyLane workflow focused on variational circuits.",
+      "category": "Hardware",
+      "difficulty": "Intermediate",
+      "points": 100,
+      "tags": [
+        "chemistry",
+        "compilation",
+        "plugins",
+        "performance",
+        "photonics"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to variational circuits",
+        "Measure and interpret results for variational circuits",
+        "Debug common failure modes in variational circuits"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.355,
+      "attempt_count": 3352,
+      "average_attempts_to_pass": 4.84,
+      "created_at": "2023-11-04T14:00:00Z",
+      "updated_at": "2023-12-14T14:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_051"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_053",
+      "title": "Debugging Resource Estimation Workflows",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on resource estimation.\n\n### Goals\n- Implement the core circuit for **Debugging Resource Estimation Workflows**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Hardware",
+      "difficulty": "Intermediate",
+      "points": 125,
+      "tags": [
+        "lightning",
+        "gpu",
+        "performance",
+        "plugins",
+        "vqe"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to resource estimation",
+        "Measure and interpret results for resource estimation",
+        "Debug common failure modes in resource estimation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.549,
+      "attempt_count": 1556,
+      "average_attempts_to_pass": 2.13,
+      "created_at": "2023-11-07T06:00:00Z",
+      "updated_at": "2024-02-10T06:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_052"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_054",
+      "title": "Hands-On Custom Operations",
+      "description": "Build and validate a PennyLane workflow focused on custom operations.\n\n**Difficulty focus:** Expert \u00b7 **Category:** Quantum Information\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Quantum Information",
+      "difficulty": "Expert",
+      "points": 300,
+      "tags": [
+        "plugins",
+        "observables",
+        "optimization",
+        "gpu"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to custom operations",
+        "Measure and interpret results for custom operations",
+        "Debug common failure modes in custom operations"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 30,
+      "completion_rate": 0.339,
+      "attempt_count": 486,
+      "average_attempts_to_pass": 4.09,
+      "created_at": "2023-11-10T00:00:00Z",
+      "updated_at": "2024-02-08T00:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": [
+        "CHAL_053",
+        "CHAL_052"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_055",
+      "title": "Hands-On Entangling Layers",
+      "description": "Build and validate a PennyLane workflow focused on entangling layers.\n\n**Difficulty focus:** Beginner \u00b7 **Category:** Error Correction\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Error Correction",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "error-mitigation",
+        "optimization",
+        "qnode",
+        "lightning",
+        "chemistry"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to entangling layers",
+        "Measure and interpret results for entangling layers",
+        "Debug common failure modes in entangling layers"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.513,
+      "attempt_count": 479,
+      "average_attempts_to_pass": 1.92,
+      "created_at": "2023-11-13T03:00:00Z",
+      "updated_at": "2024-02-25T03:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_056",
+      "title": "Certificate Track \u2014 Qaoa",
+      "description": "Build and validate a PennyLane workflow focused on QAOA.\n\n**Difficulty focus:** Beginner \u00b7 **Category:** Error Correction\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Error Correction",
+      "difficulty": "Beginner",
+      "points": 75,
+      "tags": [
+        "gpu",
+        "debugging",
+        "ansatz",
+        "performance",
+        "qnode"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to QAOA",
+        "Measure and interpret results for QAOA",
+        "Debug common failure modes in QAOA"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "archived",
+      "estimated_minutes": 15,
+      "completion_rate": 0.878,
+      "attempt_count": 1742,
+      "average_attempts_to_pass": 4.48,
+      "created_at": "2023-11-16T19:00:00Z",
+      "updated_at": "2023-12-20T19:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_057",
+      "title": "Qaoa: From Theory To Circuit",
+      "description": "Build and validate a PennyLane workflow focused on QAOA.\n\n**Difficulty focus:** Beginner \u00b7 **Category:** Quantum Chemistry\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Quantum Chemistry",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "performance",
+        "chemistry",
+        "gpu",
+        "qnode",
+        "plugins"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to QAOA",
+        "Measure and interpret results for QAOA",
+        "Debug common failure modes in QAOA"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.808,
+      "attempt_count": 623,
+      "average_attempts_to_pass": 4.81,
+      "created_at": "2023-11-19T09:00:00Z",
+      "updated_at": "2024-03-17T09:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_056",
+        "CHAL_055"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_058",
+      "title": "Scaling Custom Operations With Pennylane",
+      "description": "Build and validate a PennyLane workflow focused on custom operations.",
+      "category": "Quantum Machine Learning",
+      "difficulty": "Advanced",
+      "points": 150,
+      "tags": [
+        "qml",
+        "lightning",
+        "performance"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to custom operations",
+        "Measure and interpret results for custom operations",
+        "Debug common failure modes in custom operations"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 45,
+      "completion_rate": 0.596,
+      "attempt_count": 2404,
+      "average_attempts_to_pass": 3.47,
+      "created_at": "2023-11-22T02:00:00Z",
+      "updated_at": "2024-01-21T02:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_057",
+        "CHAL_056"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_059",
+      "title": "Intro To Photonic Cv",
+      "description": "Build and validate a PennyLane workflow focused on photonic CV.",
+      "category": "Optimization",
+      "difficulty": "Expert",
+      "points": 300,
+      "tags": [
+        "ansatz",
+        "error-mitigation"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to photonic CV",
+        "Measure and interpret results for photonic CV",
+        "Debug common failure modes in photonic CV"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.303,
+      "attempt_count": 209,
+      "average_attempts_to_pass": 6.5,
+      "created_at": "2023-11-25T19:00:00Z",
+      "updated_at": "2024-02-20T19:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_058",
+        "CHAL_057"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_060",
+      "title": "Intro To Expectation Values",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on expectation values.\n\n### Goals\n- Implement the core circuit for **Intro To Expectation Values**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Quantum Circuits",
+      "difficulty": "Advanced",
+      "points": 150,
+      "tags": [
+        "debugging",
+        "ansatz",
+        "chemistry"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to expectation values",
+        "Measure and interpret results for expectation values",
+        "Debug common failure modes in expectation values"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.387,
+      "attempt_count": 896,
+      "average_attempts_to_pass": 5.73,
+      "created_at": "2023-11-28T02:00:00Z",
+      "updated_at": "2024-01-10T02:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_059",
+        "CHAL_058"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_061",
+      "title": "Optimizing For Entangling Layers",
+      "description": "## Optimizing For Entangling Layers\n\nBuild and validate a PennyLane workflow focused on entangling layers.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Beginner` |\n| Points | **75** |\n| Est. time | 15 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Optimization",
+      "difficulty": "Beginner",
+      "points": 75,
+      "tags": [
+        "lightning",
+        "error-mitigation",
+        "vqe",
+        "measurements"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to entangling layers",
+        "Measure and interpret results for entangling layers",
+        "Debug common failure modes in entangling layers"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.646,
+      "attempt_count": 3824,
+      "average_attempts_to_pass": 3.33,
+      "created_at": "2023-12-01T16:00:00Z",
+      "updated_at": "2023-12-26T16:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_060",
+        "CHAL_059"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_062",
+      "title": "Certificate Track \u2014 Entangling Layers",
+      "description": "Build and validate a PennyLane workflow focused on entangling layers.",
+      "category": "Quantum Machine Learning",
+      "difficulty": "Intermediate",
+      "points": 100,
+      "tags": [
+        "gpu",
+        "hamiltonian",
+        "chemistry"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to entangling layers",
+        "Measure and interpret results for entangling layers",
+        "Debug common failure modes in entangling layers"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.607,
+      "attempt_count": 2000,
+      "average_attempts_to_pass": 4.93,
+      "created_at": "2023-12-04T03:00:00Z",
+      "updated_at": "2024-01-13T03:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_061",
+        "CHAL_060"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_063",
+      "title": "Intro To Jit Compilation",
+      "description": "Build and validate a PennyLane workflow focused on JIT compilation.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Compilation",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "chemistry",
+        "gpu",
+        "photonics"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to JIT compilation",
+        "Measure and interpret results for JIT compilation",
+        "Debug common failure modes in JIT compilation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.904,
+      "attempt_count": 2036,
+      "average_attempts_to_pass": 3.57,
+      "created_at": "2023-12-07T08:00:00Z",
+      "updated_at": "2023-12-26T08:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_064",
+      "title": "Understanding Hybrid Classical Loops In Practice",
+      "description": "Build and validate a PennyLane workflow focused on hybrid classical loops.\n\n**Difficulty focus:** Intermediate \u00b7 **Category:** Quantum Chemistry\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Quantum Chemistry",
+      "difficulty": "Intermediate",
+      "points": 100,
+      "tags": [
+        "photonics",
+        "lightning",
+        "basics",
+        "gpu"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to hybrid classical loops",
+        "Measure and interpret results for hybrid classical loops",
+        "Debug common failure modes in hybrid classical loops"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.919,
+      "attempt_count": 4051,
+      "average_attempts_to_pass": 5.77,
+      "created_at": "2023-12-10T09:00:00Z",
+      "updated_at": "2024-02-06T09:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_063"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_065",
+      "title": "Scaling Mid-Circuit Measurement With Pennylane",
+      "description": "### Challenge brief\n\nBuild and validate a PennyLane workflow focused on mid-circuit measurement.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`plugins, debugging, measurements`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Hamiltonians",
+      "difficulty": "Intermediate",
+      "points": 150,
+      "tags": [
+        "plugins",
+        "debugging",
+        "measurements"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to mid-circuit measurement",
+        "Measure and interpret results for mid-circuit measurement",
+        "Debug common failure modes in mid-circuit measurement"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "draft",
+      "estimated_minutes": 60,
+      "completion_rate": 0.155,
+      "attempt_count": 3914,
+      "average_attempts_to_pass": 4.91,
+      "created_at": "2023-12-13T07:00:00Z",
+      "updated_at": "2024-03-26T07:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_064"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_066",
+      "title": "Hamiltonian Simulation: From Theory To Circuit",
+      "description": "### Challenge brief\n\nBuild and validate a PennyLane workflow focused on Hamiltonian simulation.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`vqe, photonics, hamiltonian, basics`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Optimization",
+      "difficulty": "Intermediate",
+      "points": 100,
+      "tags": [
+        "vqe",
+        "photonics",
+        "hamiltonian",
+        "basics",
+        "qml"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to Hamiltonian simulation",
+        "Measure and interpret results for Hamiltonian simulation",
+        "Debug common failure modes in Hamiltonian simulation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "draft",
+      "estimated_minutes": 30,
+      "completion_rate": 0.18,
+      "attempt_count": 2211,
+      "average_attempts_to_pass": 2.93,
+      "created_at": "2023-12-16T13:00:00Z",
+      "updated_at": "2024-03-14T13:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_065",
+        "CHAL_064"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_067",
+      "title": "Scaling Parameter-Shift Rules With Pennylane",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on parameter-shift rules.\n\n### Goals\n- Implement the core circuit for **Scaling Parameter-Shift Rules With Pennylane**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Compilation",
+      "difficulty": "Advanced",
+      "points": 200,
+      "tags": [
+        "compilation",
+        "qnode",
+        "gradients",
+        "plugins",
+        "gpu"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to parameter-shift rules",
+        "Measure and interpret results for parameter-shift rules",
+        "Debug common failure modes in parameter-shift rules"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.903,
+      "attempt_count": 863,
+      "average_attempts_to_pass": 3.5,
+      "created_at": "2023-12-19T07:00:00Z",
+      "updated_at": "2024-03-17T07:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_068",
+      "title": "Hands-On Expectation Values",
+      "description": "Build and validate a PennyLane workflow focused on expectation values.",
+      "category": "Hamiltonians",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "qml",
+        "plugins",
+        "photonics",
+        "ansatz",
+        "optimization"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to expectation values",
+        "Measure and interpret results for expectation values",
+        "Debug common failure modes in expectation values"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.817,
+      "attempt_count": 2012,
+      "average_attempts_to_pass": 3.79,
+      "created_at": "2023-12-22T05:00:00Z",
+      "updated_at": "2024-03-06T05:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_069",
+      "title": "Hands-On Gradient Descent",
+      "description": "Build and validate a PennyLane workflow focused on gradient descent.\n\n**Difficulty focus:** Intermediate \u00b7 **Category:** Error Correction\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Error Correction",
+      "difficulty": "Intermediate",
+      "points": 125,
+      "tags": [
+        "compilation",
+        "optimization",
+        "gradients",
+        "hamiltonian"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to gradient descent",
+        "Measure and interpret results for gradient descent",
+        "Debug common failure modes in gradient descent"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "archived",
+      "estimated_minutes": 45,
+      "completion_rate": 0.631,
+      "attempt_count": 3515,
+      "average_attempts_to_pass": 4.83,
+      "created_at": "2023-12-25T11:00:00Z",
+      "updated_at": "2024-02-22T11:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_070",
+      "title": "Certificate Track \u2014 Photonic Cv",
+      "description": "## Certificate Track \u2014 Photonic Cv\n\nBuild and validate a PennyLane workflow focused on photonic CV.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Advanced` |\n| Points | **150** |\n| Est. time | 90 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Photonics",
+      "difficulty": "Advanced",
+      "points": 150,
+      "tags": [
+        "debugging",
+        "gpu",
+        "performance",
+        "basics"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to photonic CV",
+        "Measure and interpret results for photonic CV",
+        "Debug common failure modes in photonic CV"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.812,
+      "attempt_count": 441,
+      "average_attempts_to_pass": 6.02,
+      "created_at": "2023-12-28T12:00:00Z",
+      "updated_at": "2024-04-02T12:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_069"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_071",
+      "title": "Certificate Track \u2014 Qaoa",
+      "description": "Build and validate a PennyLane workflow focused on QAOA.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Photonics",
+      "difficulty": "Intermediate",
+      "points": 125,
+      "tags": [
+        "qml",
+        "vqe",
+        "qnode",
+        "gpu"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to QAOA",
+        "Measure and interpret results for QAOA",
+        "Debug common failure modes in QAOA"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 45,
+      "completion_rate": 0.706,
+      "attempt_count": 778,
+      "average_attempts_to_pass": 6.01,
+      "created_at": "2023-12-31T14:00:00Z",
+      "updated_at": "2024-02-11T14:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_072",
+      "title": "Debugging Device Plugins Workflows",
+      "description": "### Challenge brief\n\nBuild and validate a PennyLane workflow focused on device plugins.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`chemistry, gpu, error-mitigation, vqe`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Algorithms",
+      "difficulty": "Beginner",
+      "points": 100,
+      "tags": [
+        "chemistry",
+        "gpu",
+        "error-mitigation",
+        "vqe"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to device plugins",
+        "Measure and interpret results for device plugins",
+        "Debug common failure modes in device plugins"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "archived",
+      "estimated_minutes": 30,
+      "completion_rate": 0.723,
+      "attempt_count": 1888,
+      "average_attempts_to_pass": 5.74,
+      "created_at": "2024-01-03T14:00:00Z",
+      "updated_at": "2024-04-05T14:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_071",
+        "CHAL_070"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_073",
+      "title": "Building For Quantum Chemistry",
+      "description": "Build and validate a PennyLane workflow focused on quantum chemistry.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Quantum Machine Learning",
+      "difficulty": "Beginner",
+      "points": 75,
+      "tags": [
+        "hamiltonian",
+        "observables"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to quantum chemistry",
+        "Measure and interpret results for quantum chemistry",
+        "Debug common failure modes in quantum chemistry"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.872,
+      "attempt_count": 927,
+      "average_attempts_to_pass": 4.74,
+      "created_at": "2024-01-06T08:00:00Z",
+      "updated_at": "2024-03-07T08:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_072",
+        "CHAL_071"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_074",
+      "title": "Certificate Track \u2014 Resource Estimation",
+      "description": "Build and validate a PennyLane workflow focused on resource estimation.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Compilation",
+      "difficulty": "Beginner",
+      "points": 100,
+      "tags": [
+        "gpu",
+        "ansatz",
+        "vqe",
+        "qml",
+        "qnode"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to resource estimation",
+        "Measure and interpret results for resource estimation",
+        "Debug common failure modes in resource estimation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.213,
+      "attempt_count": 1963,
+      "average_attempts_to_pass": 5.89,
+      "created_at": "2024-01-09T01:00:00Z",
+      "updated_at": "2024-01-27T01:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_073"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_075",
+      "title": "Scaling Quantum Chemistry With Pennylane",
+      "description": "### Challenge brief\n\nBuild and validate a PennyLane workflow focused on quantum chemistry.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`chemistry, ansatz`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Quantum Chemistry",
+      "difficulty": "Advanced",
+      "points": 200,
+      "tags": [
+        "chemistry",
+        "ansatz"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to quantum chemistry",
+        "Measure and interpret results for quantum chemistry",
+        "Debug common failure modes in quantum chemistry"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 45,
+      "completion_rate": 0.294,
+      "attempt_count": 3682,
+      "average_attempts_to_pass": 6.23,
+      "created_at": "2024-01-12T08:00:00Z",
+      "updated_at": "2024-05-01T08:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_076",
+      "title": "Debugging Quantum Chemistry Workflows",
+      "description": "Build and validate a PennyLane workflow focused on quantum chemistry.",
+      "category": "Quantum Chemistry",
+      "difficulty": "Intermediate",
+      "points": 150,
+      "tags": [
+        "devices",
+        "vqe",
+        "hamiltonian",
+        "gradients"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to quantum chemistry",
+        "Measure and interpret results for quantum chemistry",
+        "Debug common failure modes in quantum chemistry"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.897,
+      "attempt_count": 454,
+      "average_attempts_to_pass": 5.35,
+      "created_at": "2024-01-15T06:00:00Z",
+      "updated_at": "2024-02-16T06:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": [
+        "CHAL_075",
+        "CHAL_074"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_077",
+      "title": "Certificate Track \u2014 Device Plugins",
+      "description": "Build and validate a PennyLane workflow focused on device plugins.\n\n**Difficulty focus:** Beginner \u00b7 **Category:** Quantum Information\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Quantum Information",
+      "difficulty": "Beginner",
+      "points": 100,
+      "tags": [
+        "qml",
+        "basics",
+        "lightning",
+        "performance"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to device plugins",
+        "Measure and interpret results for device plugins",
+        "Debug common failure modes in device plugins"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 30,
+      "completion_rate": 0.208,
+      "attempt_count": 251,
+      "average_attempts_to_pass": 1.81,
+      "created_at": "2024-01-18T04:00:00Z",
+      "updated_at": "2024-03-04T04:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": [
+        "CHAL_076",
+        "CHAL_075"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_078",
+      "title": "Exploring For Mid-Circuit Measurement",
+      "description": "Build and validate a PennyLane workflow focused on mid-circuit measurement.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Hardware",
+      "difficulty": "Beginner",
+      "points": 75,
+      "tags": [
+        "photonics",
+        "vqe",
+        "gradients",
+        "chemistry",
+        "hamiltonian"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to mid-circuit measurement",
+        "Measure and interpret results for mid-circuit measurement",
+        "Debug common failure modes in mid-circuit measurement"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.482,
+      "attempt_count": 1854,
+      "average_attempts_to_pass": 6.21,
+      "created_at": "2024-01-21T11:00:00Z",
+      "updated_at": "2024-01-27T11:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_077"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_079",
+      "title": "Scaling Variational Circuits With Pennylane",
+      "description": "Build and validate a PennyLane workflow focused on variational circuits.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Compilation",
+      "difficulty": "Beginner",
+      "points": 75,
+      "tags": [
+        "chemistry",
+        "hamiltonian"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to variational circuits",
+        "Measure and interpret results for variational circuits",
+        "Debug common failure modes in variational circuits"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "draft",
+      "estimated_minutes": 45,
+      "completion_rate": 0.607,
+      "attempt_count": 578,
+      "average_attempts_to_pass": 1.78,
+      "created_at": "2024-01-24T02:00:00Z",
+      "updated_at": "2024-04-13T02:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_078"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_080",
+      "title": "Scaling Hybrid Classical Loops With Pennylane",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on hybrid classical loops.\n\n### Goals\n- Implement the core circuit for **Scaling Hybrid Classical Loops With Pennylane**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Hardware",
+      "difficulty": "Intermediate",
+      "points": 125,
+      "tags": [
+        "compilation",
+        "devices"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to hybrid classical loops",
+        "Measure and interpret results for hybrid classical loops",
+        "Debug common failure modes in hybrid classical loops"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 30,
+      "completion_rate": 0.451,
+      "attempt_count": 3755,
+      "average_attempts_to_pass": 3.25,
+      "created_at": "2024-01-27T13:00:00Z",
+      "updated_at": "2024-04-30T13:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_079"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_081",
+      "title": "Debugging Jit Compilation Workflows",
+      "description": "## Debugging Jit Compilation Workflows\n\nBuild and validate a PennyLane workflow focused on JIT compilation.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Beginner` |\n| Points | **75** |\n| Est. time | 45 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Compilation",
+      "difficulty": "Beginner",
+      "points": 75,
+      "tags": [
+        "gradients",
+        "performance",
+        "debugging",
+        "compilation",
+        "ansatz"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to JIT compilation",
+        "Measure and interpret results for JIT compilation",
+        "Debug common failure modes in JIT compilation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 45,
+      "completion_rate": 0.769,
+      "attempt_count": 531,
+      "average_attempts_to_pass": 4.27,
+      "created_at": "2024-01-30T03:00:00Z",
+      "updated_at": "2024-04-11T03:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_080",
+        "CHAL_079"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_082",
+      "title": "Scaling Quantum Kernels With Pennylane",
+      "description": "Build and validate a PennyLane workflow focused on quantum kernels.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Quantum Circuits",
+      "difficulty": "Intermediate",
+      "points": 150,
+      "tags": [
+        "observables",
+        "vqe",
+        "photonics",
+        "devices"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to quantum kernels",
+        "Measure and interpret results for quantum kernels",
+        "Debug common failure modes in quantum kernels"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 30,
+      "completion_rate": 0.798,
+      "attempt_count": 2908,
+      "average_attempts_to_pass": 5.67,
+      "created_at": "2024-02-02T04:00:00Z",
+      "updated_at": "2024-03-21T04:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_081"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_083",
+      "title": "Building For Custom Operations",
+      "description": "## Building For Custom Operations\n\nBuild and validate a PennyLane workflow focused on custom operations.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Beginner` |\n| Points | **75** |\n| Est. time | 30 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Getting Started",
+      "difficulty": "Beginner",
+      "points": 75,
+      "tags": [
+        "lightning",
+        "gpu",
+        "error-mitigation"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to custom operations",
+        "Measure and interpret results for custom operations",
+        "Debug common failure modes in custom operations"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 30,
+      "completion_rate": 0.573,
+      "attempt_count": 3323,
+      "average_attempts_to_pass": 1.48,
+      "created_at": "2024-02-05T11:00:00Z",
+      "updated_at": "2024-05-10T11:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_084",
+      "title": "Intro To Shot Noise",
+      "description": "## Intro To Shot Noise\n\nBuild and validate a PennyLane workflow focused on shot noise.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Beginner` |\n| Points | **75** |\n| Est. time | 90 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Algorithms",
+      "difficulty": "Beginner",
+      "points": 75,
+      "tags": [
+        "gpu",
+        "error-mitigation",
+        "gradients",
+        "qnode"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to shot noise",
+        "Measure and interpret results for shot noise",
+        "Debug common failure modes in shot noise"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.16,
+      "attempt_count": 708,
+      "average_attempts_to_pass": 2.57,
+      "created_at": "2024-02-08T04:00:00Z",
+      "updated_at": "2024-05-03T04:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_083"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_085",
+      "title": "Certificate Track \u2014 Hybrid Classical Loops",
+      "description": "## Certificate Track \u2014 Hybrid Classical Loops\n\nBuild and validate a PennyLane workflow focused on hybrid classical loops.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Intermediate` |\n| Points | **125** |\n| Est. time | 90 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Hamiltonians",
+      "difficulty": "Intermediate",
+      "points": 125,
+      "tags": [
+        "vqe",
+        "gpu",
+        "chemistry",
+        "photonics",
+        "debugging"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to hybrid classical loops",
+        "Measure and interpret results for hybrid classical loops",
+        "Debug common failure modes in hybrid classical loops"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.164,
+      "attempt_count": 1714,
+      "average_attempts_to_pass": 2.73,
+      "created_at": "2024-02-11T01:00:00Z",
+      "updated_at": "2024-03-10T01:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": [
+        "CHAL_084"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_086",
+      "title": "Intro To Tensor Networks",
+      "description": "Build and validate a PennyLane workflow focused on tensor networks.",
+      "category": "Algorithms",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "measurements",
+        "compilation",
+        "plugins"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to tensor networks",
+        "Measure and interpret results for tensor networks",
+        "Debug common failure modes in tensor networks"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.765,
+      "attempt_count": 630,
+      "average_attempts_to_pass": 3.24,
+      "created_at": "2024-02-14T16:00:00Z",
+      "updated_at": "2024-05-19T16:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_085"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_087",
+      "title": "Debugging Variational Circuits Workflows",
+      "description": "## Debugging Variational Circuits Workflows\n\nBuild and validate a PennyLane workflow focused on variational circuits.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Intermediate` |\n| Points | **100** |\n| Est. time | 90 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Photonics",
+      "difficulty": "Intermediate",
+      "points": 100,
+      "tags": [
+        "ansatz",
+        "gpu",
+        "vqe",
+        "measurements",
+        "basics"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to variational circuits",
+        "Measure and interpret results for variational circuits",
+        "Debug common failure modes in variational circuits"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.488,
+      "attempt_count": 3004,
+      "average_attempts_to_pass": 1.58,
+      "created_at": "2024-02-17T10:00:00Z",
+      "updated_at": "2024-06-05T10:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_088",
+      "title": "Understanding Jit Compilation In Practice",
+      "description": "Build and validate a PennyLane workflow focused on JIT compilation.",
+      "category": "Quantum Circuits",
+      "difficulty": "Intermediate",
+      "points": 150,
+      "tags": [
+        "plugins",
+        "error-mitigation",
+        "optimization",
+        "gradients"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to JIT compilation",
+        "Measure and interpret results for JIT compilation",
+        "Debug common failure modes in JIT compilation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.528,
+      "attempt_count": 2902,
+      "average_attempts_to_pass": 3.0,
+      "created_at": "2024-02-20T16:00:00Z",
+      "updated_at": "2024-06-04T16:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_089",
+      "title": "Quantum Kernels: From Theory To Circuit",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on quantum kernels.\n\n### Goals\n- Implement the core circuit for **Quantum Kernels: From Theory To Circuit**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Compilation",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "optimization",
+        "chemistry"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to quantum kernels",
+        "Measure and interpret results for quantum kernels",
+        "Debug common failure modes in quantum kernels"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.479,
+      "attempt_count": 2687,
+      "average_attempts_to_pass": 5.77,
+      "created_at": "2024-02-23T14:00:00Z",
+      "updated_at": "2024-05-14T14:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_090",
+      "title": "Hands-On Gradient Descent",
+      "description": "## Hands-On Gradient Descent\n\nBuild and validate a PennyLane workflow focused on gradient descent.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Beginner` |\n| Points | **75** |\n| Est. time | 60 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Photonics",
+      "difficulty": "Beginner",
+      "points": 75,
+      "tags": [
+        "observables",
+        "photonics"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to gradient descent",
+        "Measure and interpret results for gradient descent",
+        "Debug common failure modes in gradient descent"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.15,
+      "attempt_count": 3060,
+      "average_attempts_to_pass": 5.59,
+      "created_at": "2024-02-26T02:00:00Z",
+      "updated_at": "2024-03-07T02:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_089",
+        "CHAL_088"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_091",
+      "title": "Optimizing For Hybrid Classical Loops",
+      "description": "## Optimizing For Hybrid Classical Loops\n\nBuild and validate a PennyLane workflow focused on hybrid classical loops.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Intermediate` |\n| Points | **125** |\n| Est. time | 60 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Photonics",
+      "difficulty": "Intermediate",
+      "points": 125,
+      "tags": [
+        "error-mitigation",
+        "chemistry",
+        "photonics"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to hybrid classical loops",
+        "Measure and interpret results for hybrid classical loops",
+        "Debug common failure modes in hybrid classical loops"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "archived",
+      "estimated_minutes": 60,
+      "completion_rate": 0.203,
+      "attempt_count": 2853,
+      "average_attempts_to_pass": 6.4,
+      "created_at": "2024-02-29T04:00:00Z",
+      "updated_at": "2024-03-11T04:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_092",
+      "title": "Qaoa: From Theory To Circuit",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on QAOA.\n\n### Goals\n- Implement the core circuit for **Qaoa: From Theory To Circuit**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Hamiltonians",
+      "difficulty": "Advanced",
+      "points": 175,
+      "tags": [
+        "measurements",
+        "ansatz",
+        "error-mitigation",
+        "qnode"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to QAOA",
+        "Measure and interpret results for QAOA",
+        "Debug common failure modes in QAOA"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.384,
+      "attempt_count": 3206,
+      "average_attempts_to_pass": 2.63,
+      "created_at": "2024-03-03T20:00:00Z",
+      "updated_at": "2024-06-04T20:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": [
+        "CHAL_091"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_093",
+      "title": "Debugging Parameter-Shift Rules Workflows",
+      "description": "Build and validate a PennyLane workflow focused on parameter-shift rules.\n\n**Difficulty focus:** Intermediate \u00b7 **Category:** Compilation\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Compilation",
+      "difficulty": "Intermediate",
+      "points": 100,
+      "tags": [
+        "qml",
+        "gradients",
+        "gpu",
+        "measurements",
+        "error-mitigation"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to parameter-shift rules",
+        "Measure and interpret results for parameter-shift rules",
+        "Debug common failure modes in parameter-shift rules"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.918,
+      "attempt_count": 805,
+      "average_attempts_to_pass": 4.59,
+      "created_at": "2024-03-06T04:00:00Z",
+      "updated_at": "2024-04-30T04:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_094",
+      "title": "Debugging Quantum Chemistry Workflows",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on quantum chemistry.\n\n### Goals\n- Implement the core circuit for **Debugging Quantum Chemistry Workflows**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Quantum Information",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "qml",
+        "performance",
+        "gradients"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to quantum chemistry",
+        "Measure and interpret results for quantum chemistry",
+        "Debug common failure modes in quantum chemistry"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.526,
+      "attempt_count": 349,
+      "average_attempts_to_pass": 4.67,
+      "created_at": "2024-03-09T09:00:00Z",
+      "updated_at": "2024-06-30T09:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": [
+        "CHAL_093",
+        "CHAL_092"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_095",
+      "title": "Photonic Cv: From Theory To Circuit",
+      "description": "Build and validate a PennyLane workflow focused on photonic CV.\n\n**Difficulty focus:** Beginner \u00b7 **Category:** Getting Started\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Getting Started",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "observables",
+        "plugins",
+        "hamiltonian",
+        "gpu",
+        "compilation"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to photonic CV",
+        "Measure and interpret results for photonic CV",
+        "Debug common failure modes in photonic CV"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 45,
+      "completion_rate": 0.892,
+      "attempt_count": 3882,
+      "average_attempts_to_pass": 5.98,
+      "created_at": "2024-03-12T07:00:00Z",
+      "updated_at": "2024-04-06T07:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_094",
+        "CHAL_093"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_096",
+      "title": "Hands-On Custom Operations",
+      "description": "## Hands-On Custom Operations\n\nBuild and validate a PennyLane workflow focused on custom operations.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Expert` |\n| Points | **275** |\n| Est. time | 45 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Quantum Machine Learning",
+      "difficulty": "Expert",
+      "points": 275,
+      "tags": [
+        "optimization",
+        "devices",
+        "qml",
+        "lightning",
+        "qnode"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to custom operations",
+        "Measure and interpret results for custom operations",
+        "Debug common failure modes in custom operations"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 45,
+      "completion_rate": 0.564,
+      "attempt_count": 880,
+      "average_attempts_to_pass": 4.94,
+      "created_at": "2024-03-15T20:00:00Z",
+      "updated_at": "2024-05-21T20:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_095"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_097",
+      "title": "Intro To Parameter-Shift Rules",
+      "description": "Build and validate a PennyLane workflow focused on parameter-shift rules.\n\n**Difficulty focus:** Advanced \u00b7 **Category:** Quantum Chemistry\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Quantum Chemistry",
+      "difficulty": "Advanced",
+      "points": 175,
+      "tags": [
+        "plugins",
+        "hamiltonian"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to parameter-shift rules",
+        "Measure and interpret results for parameter-shift rules",
+        "Debug common failure modes in parameter-shift rules"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "draft",
+      "estimated_minutes": 60,
+      "completion_rate": 0.163,
+      "attempt_count": 4152,
+      "average_attempts_to_pass": 3.12,
+      "created_at": "2024-03-18T11:00:00Z",
+      "updated_at": "2024-05-07T11:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_096"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_098",
+      "title": "Debugging Qaoa Workflows",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on QAOA.\n\n### Goals\n- Implement the core circuit for **Debugging Qaoa Workflows**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Algorithms",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "gpu",
+        "chemistry"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to QAOA",
+        "Measure and interpret results for QAOA",
+        "Debug common failure modes in QAOA"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.479,
+      "attempt_count": 83,
+      "average_attempts_to_pass": 5.99,
+      "created_at": "2024-03-21T04:00:00Z",
+      "updated_at": "2024-03-24T04:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_099",
+      "title": "Scaling Hamiltonian Simulation With Pennylane",
+      "description": "### Challenge brief\n\nBuild and validate a PennyLane workflow focused on Hamiltonian simulation.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`gpu, vqe, qnode`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Quantum Circuits",
+      "difficulty": "Intermediate",
+      "points": 150,
+      "tags": [
+        "gpu",
+        "vqe",
+        "qnode"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to Hamiltonian simulation",
+        "Measure and interpret results for Hamiltonian simulation",
+        "Debug common failure modes in Hamiltonian simulation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.486,
+      "attempt_count": 948,
+      "average_attempts_to_pass": 5.62,
+      "created_at": "2024-03-24T07:00:00Z",
+      "updated_at": "2024-05-27T07:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_098",
+        "CHAL_097"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_100",
+      "title": "Shot Noise: From Theory To Circuit",
+      "description": "Build and validate a PennyLane workflow focused on shot noise.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Quantum Chemistry",
+      "difficulty": "Intermediate",
+      "points": 150,
+      "tags": [
+        "performance",
+        "observables"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to shot noise",
+        "Measure and interpret results for shot noise",
+        "Debug common failure modes in shot noise"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 30,
+      "completion_rate": 0.651,
+      "attempt_count": 741,
+      "average_attempts_to_pass": 3.93,
+      "created_at": "2024-03-27T07:00:00Z",
+      "updated_at": "2024-05-13T07:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_099",
+        "CHAL_098"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_101",
+      "title": "Optimizing For Resource Estimation",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on resource estimation.\n\n### Goals\n- Implement the core circuit for **Optimizing For Resource Estimation**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Error Correction",
+      "difficulty": "Intermediate",
+      "points": 150,
+      "tags": [
+        "measurements",
+        "observables"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to resource estimation",
+        "Measure and interpret results for resource estimation",
+        "Debug common failure modes in resource estimation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 45,
+      "completion_rate": 0.751,
+      "attempt_count": 2864,
+      "average_attempts_to_pass": 2.4,
+      "created_at": "2024-03-30T08:00:00Z",
+      "updated_at": "2024-06-23T08:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_100",
+        "CHAL_099"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_102",
+      "title": "Debugging Mid-Circuit Measurement Workflows",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on mid-circuit measurement.\n\n### Goals\n- Implement the core circuit for **Debugging Mid-Circuit Measurement Workflows**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Compilation",
+      "difficulty": "Beginner",
+      "points": 75,
+      "tags": [
+        "chemistry",
+        "optimization",
+        "qml",
+        "gradients",
+        "hamiltonian"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to mid-circuit measurement",
+        "Measure and interpret results for mid-circuit measurement",
+        "Debug common failure modes in mid-circuit measurement"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 15,
+      "completion_rate": 0.753,
+      "attempt_count": 383,
+      "average_attempts_to_pass": 2.8,
+      "created_at": "2024-04-02T01:00:00Z",
+      "updated_at": "2024-05-12T01:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_101",
+        "CHAL_100"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_103",
+      "title": "Certificate Track \u2014 Entangling Layers",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on entangling layers.\n\n### Goals\n- Implement the core circuit for **Certificate Track \u2014 Entangling Layers**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Hamiltonians",
+      "difficulty": "Beginner",
+      "points": 100,
+      "tags": [
+        "error-mitigation",
+        "lightning"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to entangling layers",
+        "Measure and interpret results for entangling layers",
+        "Debug common failure modes in entangling layers"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.832,
+      "attempt_count": 3642,
+      "average_attempts_to_pass": 5.93,
+      "created_at": "2024-04-05T03:00:00Z",
+      "updated_at": "2024-05-25T03:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_104",
+      "title": "Hands-On Entangling Layers",
+      "description": "Build and validate a PennyLane workflow focused on entangling layers.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Hardware",
+      "difficulty": "Advanced",
+      "points": 175,
+      "tags": [
+        "gradients",
+        "ansatz",
+        "optimization",
+        "gpu",
+        "error-mitigation"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to entangling layers",
+        "Measure and interpret results for entangling layers",
+        "Debug common failure modes in entangling layers"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.357,
+      "attempt_count": 3692,
+      "average_attempts_to_pass": 4.35,
+      "created_at": "2024-04-08T03:00:00Z",
+      "updated_at": "2024-06-02T03:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": [
+        "CHAL_103",
+        "CHAL_102"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_105",
+      "title": "Debugging Gradient Descent Workflows",
+      "description": "Build and validate a PennyLane workflow focused on gradient descent.\n\n**Difficulty focus:** Intermediate \u00b7 **Category:** Quantum Circuits\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Quantum Circuits",
+      "difficulty": "Intermediate",
+      "points": 100,
+      "tags": [
+        "gradients",
+        "measurements"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to gradient descent",
+        "Measure and interpret results for gradient descent",
+        "Debug common failure modes in gradient descent"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.664,
+      "attempt_count": 295,
+      "average_attempts_to_pass": 1.87,
+      "created_at": "2024-04-11T11:00:00Z",
+      "updated_at": "2024-06-28T11:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_106",
+      "title": "Debugging Hamiltonian Simulation Workflows",
+      "description": "Build and validate a PennyLane workflow focused on Hamiltonian simulation.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Quantum Chemistry",
+      "difficulty": "Beginner",
+      "points": 100,
+      "tags": [
+        "performance",
+        "qml"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to Hamiltonian simulation",
+        "Measure and interpret results for Hamiltonian simulation",
+        "Debug common failure modes in Hamiltonian simulation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "draft",
+      "estimated_minutes": 45,
+      "completion_rate": 0.475,
+      "attempt_count": 669,
+      "average_attempts_to_pass": 4.2,
+      "created_at": "2024-04-14T14:00:00Z",
+      "updated_at": "2024-06-21T14:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_105"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_107",
+      "title": "Understanding Mid-Circuit Measurement In Practice",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on mid-circuit measurement.\n\n### Goals\n- Implement the core circuit for **Understanding Mid-Circuit Measurement In Practice**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Hardware",
+      "difficulty": "Intermediate",
+      "points": 100,
+      "tags": [
+        "chemistry",
+        "photonics",
+        "measurements"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to mid-circuit measurement",
+        "Measure and interpret results for mid-circuit measurement",
+        "Debug common failure modes in mid-circuit measurement"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 45,
+      "completion_rate": 0.683,
+      "attempt_count": 1797,
+      "average_attempts_to_pass": 6.48,
+      "created_at": "2024-04-17T17:00:00Z",
+      "updated_at": "2024-05-24T17:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_108",
+      "title": "Intro To Quantum Kernels",
+      "description": "### Challenge brief\n\nBuild and validate a PennyLane workflow focused on quantum kernels.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`gradients, error-mitigation, observables, performance`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Hardware",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "gradients",
+        "error-mitigation",
+        "observables",
+        "performance",
+        "gpu"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to quantum kernels",
+        "Measure and interpret results for quantum kernels",
+        "Debug common failure modes in quantum kernels"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "draft",
+      "estimated_minutes": 120,
+      "completion_rate": 0.688,
+      "attempt_count": 1466,
+      "average_attempts_to_pass": 5.39,
+      "created_at": "2024-04-20T09:00:00Z",
+      "updated_at": "2024-06-25T09:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_109",
+      "title": "Intro To Device Plugins",
+      "description": "Build and validate a PennyLane workflow focused on device plugins.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Hamiltonians",
+      "difficulty": "Advanced",
+      "points": 150,
+      "tags": [
+        "hamiltonian",
+        "compilation",
+        "qml",
+        "gradients"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to device plugins",
+        "Measure and interpret results for device plugins",
+        "Debug common failure modes in device plugins"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.695,
+      "attempt_count": 3405,
+      "average_attempts_to_pass": 5.25,
+      "created_at": "2024-04-23T02:00:00Z",
+      "updated_at": "2024-08-07T02:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_110",
+      "title": "Intro To Mid-Circuit Measurement",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on mid-circuit measurement.\n\n### Goals\n- Implement the core circuit for **Intro To Mid-Circuit Measurement**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Algorithms",
+      "difficulty": "Intermediate",
+      "points": 125,
+      "tags": [
+        "qml",
+        "ansatz",
+        "photonics"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to mid-circuit measurement",
+        "Measure and interpret results for mid-circuit measurement",
+        "Debug common failure modes in mid-circuit measurement"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.242,
+      "attempt_count": 1388,
+      "average_attempts_to_pass": 1.97,
+      "created_at": "2024-04-26T01:00:00Z",
+      "updated_at": "2024-08-24T01:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": [
+        "CHAL_109"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_111",
+      "title": "Hands-On Shot Noise",
+      "description": "## Overview\n\nBuild and validate a PennyLane workflow focused on shot noise.\n\n### Goals\n- Implement the core circuit for **Hands-On Shot Noise**\n- Validate outputs against the expected measurement results\n- Document any assumptions in your solution notes\n\n### Starter tip\n```python\nimport pennylane as qml\ndev = qml.device(\"default.qubit\", wires=2)\n```\n\n> Hint: start small, then scale qubit count once the circuit is correct.",
+      "category": "Compilation",
+      "difficulty": "Advanced",
+      "points": 150,
+      "tags": [
+        "qml",
+        "gpu",
+        "compilation",
+        "gradients"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to shot noise",
+        "Measure and interpret results for shot noise",
+        "Debug common failure modes in shot noise"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.873,
+      "attempt_count": 1303,
+      "average_attempts_to_pass": 2.02,
+      "created_at": "2024-04-29T16:00:00Z",
+      "updated_at": "2024-07-18T16:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_110",
+        "CHAL_109"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_112",
+      "title": "Understanding Expectation Values In Practice",
+      "description": "Build and validate a PennyLane workflow focused on expectation values.\n\n**Difficulty focus:** Advanced \u00b7 **Category:** Compilation\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Compilation",
+      "difficulty": "Advanced",
+      "points": 150,
+      "tags": [
+        "devices",
+        "debugging",
+        "ansatz",
+        "basics"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to expectation values",
+        "Measure and interpret results for expectation values",
+        "Debug common failure modes in expectation values"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "draft",
+      "estimated_minutes": 90,
+      "completion_rate": 0.352,
+      "attempt_count": 2514,
+      "average_attempts_to_pass": 3.71,
+      "created_at": "2024-05-02T15:00:00Z",
+      "updated_at": "2024-08-14T15:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_111"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_113",
+      "title": "Gradient Descent: From Theory To Circuit",
+      "description": "Build and validate a PennyLane workflow focused on gradient descent.",
+      "category": "Quantum Chemistry",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "hamiltonian",
+        "devices",
+        "error-mitigation",
+        "qml",
+        "compilation"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to gradient descent",
+        "Measure and interpret results for gradient descent",
+        "Debug common failure modes in gradient descent"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 45,
+      "completion_rate": 0.9,
+      "attempt_count": 1111,
+      "average_attempts_to_pass": 5.21,
+      "created_at": "2024-05-05T10:00:00Z",
+      "updated_at": "2024-07-10T10:00:00Z",
+      "author": "pennylane_team",
+      "prerequisite_challenge_ids": [
+        "CHAL_112"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_114",
+      "title": "Intro To Qaoa",
+      "description": "Build and validate a PennyLane workflow focused on QAOA.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Algorithms",
+      "difficulty": "Intermediate",
+      "points": 125,
+      "tags": [
+        "qnode",
+        "gpu"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to QAOA",
+        "Measure and interpret results for QAOA",
+        "Debug common failure modes in QAOA"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "draft",
+      "estimated_minutes": 60,
+      "completion_rate": 0.319,
+      "attempt_count": 1348,
+      "average_attempts_to_pass": 5.49,
+      "created_at": "2024-05-08T12:00:00Z",
+      "updated_at": "2024-09-05T12:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_115",
+      "title": "Intro To Error Mitigation",
+      "description": "## Intro To Error Mitigation\n\nBuild and validate a PennyLane workflow focused on error mitigation.\n\n#### Constraints\n| Item | Value |\n| --- | --- |\n| Difficulty | `Intermediate` |\n| Points | **150** |\n| Est. time | 45 min |\n\nIf you get stuck, revisit the learning objectives and try a minimal reproducible circuit first.",
+      "category": "Quantum Circuits",
+      "difficulty": "Intermediate",
+      "points": 150,
+      "tags": [
+        "basics",
+        "gradients",
+        "measurements",
+        "photonics",
+        "hamiltonian"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to error mitigation",
+        "Measure and interpret results for error mitigation",
+        "Debug common failure modes in error mitigation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 45,
+      "completion_rate": 0.159,
+      "attempt_count": 2344,
+      "average_attempts_to_pass": 3.77,
+      "created_at": "2024-05-11T07:00:00Z",
+      "updated_at": "2024-09-01T07:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_114"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_116",
+      "title": "Scaling Resource Estimation With Pennylane",
+      "description": "Build and validate a PennyLane workflow focused on resource estimation.\n\n**Difficulty focus:** Beginner \u00b7 **Category:** Quantum Circuits\n\n### What you will practice\n1. Building a PennyLane `QNode`\n2. Choosing an appropriate observable\n3. Interpreting expectation values / probabilities\n\nUseful reference: [PennyLane docs](https://docs.pennylane.ai/)",
+      "category": "Quantum Circuits",
+      "difficulty": "Beginner",
+      "points": 50,
+      "tags": [
+        "measurements",
+        "observables",
+        "qnode",
+        "performance"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to resource estimation",
+        "Measure and interpret results for resource estimation",
+        "Debug common failure modes in resource estimation"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 30,
+      "completion_rate": 0.41,
+      "attempt_count": 2404,
+      "average_attempts_to_pass": 1.5,
+      "created_at": "2024-05-14T01:00:00Z",
+      "updated_at": "2024-07-18T01:00:00Z",
+      "author": "catalyst_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_115",
+        "CHAL_114"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_117",
+      "title": "Understanding Vqe In Practice",
+      "description": "### Challenge brief\n\nBuild and validate a PennyLane workflow focused on VQE.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`observables, error-mitigation, compilation, performance`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Optimization",
+      "difficulty": "Advanced",
+      "points": 200,
+      "tags": [
+        "observables",
+        "error-mitigation",
+        "compilation",
+        "performance",
+        "qml"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to VQE",
+        "Measure and interpret results for VQE",
+        "Debug common failure modes in VQE"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 60,
+      "completion_rate": 0.52,
+      "attempt_count": 411,
+      "average_attempts_to_pass": 1.31,
+      "created_at": "2024-05-17T06:00:00Z",
+      "updated_at": "2024-08-17T06:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_116"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_118",
+      "title": "Shot Noise: From Theory To Circuit",
+      "description": "### Challenge brief\n\nBuild and validate a PennyLane workflow focused on shot noise.\n\nUse the checklist below before submitting:\n\n- [ ] Circuit runs without device errors\n- [ ] Measurements match the challenge statement\n- [ ] Tags align with concepts used (`optimization, measurements, gpu, error-mitigation`)\n\n```text\nExpected workflow: design \u2192 simulate \u2192 measure \u2192 compare\n```",
+      "category": "Photonics",
+      "difficulty": "Intermediate",
+      "points": 150,
+      "tags": [
+        "optimization",
+        "measurements",
+        "gpu",
+        "error-mitigation"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to shot noise",
+        "Measure and interpret results for shot noise",
+        "Debug common failure modes in shot noise"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.512,
+      "attempt_count": 2495,
+      "average_attempts_to_pass": 3.66,
+      "created_at": "2024-05-20T16:00:00Z",
+      "updated_at": "2024-05-23T16:00:00Z",
+      "author": "demo_helper",
+      "prerequisite_challenge_ids": [
+        "CHAL_117"
+      ]
+    },
+    {
+      "challenge_id": "CHAL_119",
+      "title": "Hands-On Quantum Kernels",
+      "description": "Build and validate a PennyLane workflow focused on quantum kernels.\n\n---\n\n### Suggested approach\n1. Sketch the circuit diagram\n2. Implement with `@qml.qnode(dev)`\n3. Compare analytic vs finite-shot results\n\n```python\n@qml.qnode(dev)\ndef circuit():\n    # TODO: apply gates for this challenge\n    return qml.expval(qml.PauliZ(0))\n```\n\n*Keep answers readable \u2014 markdown in notes is encouraged.*",
+      "category": "Photonics",
+      "difficulty": "Expert",
+      "points": 300,
+      "tags": [
+        "lightning",
+        "debugging",
+        "plugins",
+        "qnode",
+        "chemistry"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to quantum kernels",
+        "Measure and interpret results for quantum kernels",
+        "Debug common failure modes in quantum kernels"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 120,
+      "completion_rate": 0.616,
+      "attempt_count": 3154,
+      "average_attempts_to_pass": 1.9,
+      "created_at": "2024-05-23T05:00:00Z",
+      "updated_at": "2024-08-19T05:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": []
+    },
+    {
+      "challenge_id": "CHAL_120",
+      "title": "Certificate Track \u2014 Custom Operations",
+      "description": "Build and validate a PennyLane workflow focused on custom operations.",
+      "category": "Error Correction",
+      "difficulty": "Expert",
+      "points": 250,
+      "tags": [
+        "ansatz",
+        "qml",
+        "performance",
+        "devices"
+      ],
+      "learning_objectives": [
+        "Implement a circuit related to custom operations",
+        "Measure and interpret results for custom operations",
+        "Debug common failure modes in custom operations"
+      ],
+      "hints": [
+        "Start from a small qubit register and scale up.",
+        "Compare analytic and shot-based results.",
+        "Profile with qml.specs before optimizing blindly."
+      ],
+      "status": "published",
+      "estimated_minutes": 90,
+      "completion_rate": 0.856,
+      "attempt_count": 550,
+      "average_attempts_to_pass": 4.91,
+      "created_at": "2024-05-26T13:00:00Z",
+      "updated_at": "2024-08-01T13:00:00Z",
+      "author": "community_mod",
+      "prerequisite_challenge_ids": [
+        "CHAL_119",
+        "CHAL_118"
+      ]
+    }
+  ],
+  "meta": {
+    "version": "2.0",
+    "count": 120,
+    "generated_for": "senior-frontend-take-home"
+  }
+}
