@@ -93,3 +93,20 @@ def client(database: None) -> Iterator[Callable[..., TestClient]]:
             return stack.enter_context(TestClient(app, headers=headers))
 
         yield make_client
+
+
+@pytest.fixture
+def fresh_db(client: Callable[..., TestClient]) -> Callable[..., TestClient]:
+    """The seed and nothing else, for tests that assert absolute seeded totals.
+
+    The session database accumulates whatever earlier tests posted, so a test that
+    checks "1725 community replies" has to pay for a drop, a migrate and a re-seed.
+    The pool is disposed first: DROP SCHEMA waits behind any pooled connection that
+    still has a transaction open.
+    """
+    test_engine.dispose()
+    _reset_schema()
+    _migrate()
+    with TestSessionLocal() as session:
+        seed(session)
+    return client
