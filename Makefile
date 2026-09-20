@@ -4,7 +4,7 @@ COMPOSE ?= docker compose
 # `exec` does not forward the host environment, so the seed's one gate is passed through.
 FORCE_SEED ?= 0
 
-.PHONY: up down reset migrate seed test logs psql
+.PHONY: up down reset migrate seed test demo logs psql
 
 up:       ## Build and start the stack; API on http://localhost:8000/docs
 	$(COMPOSE) up --build
@@ -23,6 +23,9 @@ seed:     ## Run the seed against the running stack (FORCE_SEED=1 re-runs it)
 
 test:     ## Run pytest in a one-off container; the tests own pennylane_test
 	$(COMPOSE) run --rm --entrypoint pytest app
+
+demo:     ## Walk the API end to end against the running stack, asserting every step
+	bash scripts/walkthrough.sh
 
 logs:     ## Follow the app logs
 	$(COMPOSE) logs -f app

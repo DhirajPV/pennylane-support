@@ -56,8 +56,12 @@ def test_seeded_insights(
         community["first_replies"]["total"],
     ) == (563, 733)
 
-    assert insights["first_reply"]["no_reply"] == 67
-    assert insights["first_reply"]["excluded_negative"] == 140
+    first_reply = insights["first_reply"]
+    assert first_reply["sample_size"] == 593
+    assert first_reply["excluded_negative"] == 140
+    assert first_reply["no_reply"] == 67
+    # The three partition the 800 conversations: answered, answered out of order, unanswered.
+    assert first_reply["sample_size"] + first_reply["excluded_negative"] + first_reply["no_reply"] == 800
 
     assert insights["challenge_load"][0]["external_id"] == "CHAL_015"
 

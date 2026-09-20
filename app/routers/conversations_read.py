@@ -1,7 +1,7 @@
 """Conversation reads: the queue, one conversation, and the rest of its messages.
 
 `status` is a filter name here, so fastapi.status is imported under another name.
-The write routes live in conversations.py; both mount the same prefix.
+The write routes live in conversations_write.py; both mount the same prefix.
 """
 
 from __future__ import annotations
@@ -74,12 +74,17 @@ def list_conversations(
     tag: str | None = None,
     has_accepted: bool | None = None,
     unassigned: bool = False,
+    unresolved: bool = False,
     sort: QueueSort = "activity",
     include_deleted: bool = False,
     limit: Limit = 20,
     offset: Offset = 0,
 ) -> Page[ConversationListItem]:
-    """Filters are ANDed. Pinned first, except under sort=priority, which is the queue order."""
+    """Filters are ANDed. Pinned first, except under sort=priority, which is the queue order.
+
+    unresolved=true is resolved_at IS NULL, independent of status: it is what the support
+    queue asks for, and what lets the query use the partial index (see docs/plans.md).
+    """
     if unassigned and assignee is not None:
         raise HTTPException(
             http_status.HTTP_422_UNPROCESSABLE_CONTENT,
@@ -98,6 +103,7 @@ def list_conversations(
             "tag": tag,
             "has_accepted": has_accepted,
             "unassigned": unassigned,
+            "unresolved": unresolved,
         },
         sort=sort,
         limit=limit,

@@ -1,7 +1,8 @@
 """Fixtures: one migrated, seeded pennylane_test per session, and an httpx client.
 
-The tests own their database end to end. `make test` runs with SKIP_SEED=1 because the
-entrypoint's migrate/seed targets the development database, not this one.
+The tests own their database end to end. `make test` runs with --entrypoint pytest, which
+skips the image entrypoint entirely, so nothing here migrates or seeds the application
+database.
 """
 
 from __future__ import annotations

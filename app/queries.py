@@ -326,8 +326,13 @@ def conversation_list_query(
     """A page of conversations plus the total for that filter set.
 
     filters: q, status, priority, assignee (handle), challenge_id, tag (name),
-    has_accepted, unassigned. Rejecting unassigned together with assignee is the
-    router's 422, not this function's.
+    has_accepted, unassigned, unresolved. Rejecting unassigned together with assignee
+    is the router's 422, not this function's.
+
+    unresolved is resolved_at IS NULL, not a status filter. It is the other half of
+    ix_conversations_assignee_open's predicate, so a queue that asks for it can use the
+    index; a status filter cannot, because Postgres cannot prove status implies
+    resolved_at IS NULL.
 
     The whole-table message aggregate is built only when something needs it to choose
     rows: the has_accepted filter, or sort=helpful, which orders across the whole
@@ -369,6 +374,8 @@ def conversation_list_query(
         conditions.append(func.coalesce(stats.c.has_accepted, False).is_(bool(has_accepted)))  # type: ignore[union-attr]
     if filters.get("unassigned"):
         conditions.append(Conversation.assignee_id.is_(None))
+    if filters.get("unresolved"):
+        conditions.append(Conversation.resolved_at.is_(None))
 
     pinned_first = Conversation.is_pinned.desc()
     if sort == "helpful":

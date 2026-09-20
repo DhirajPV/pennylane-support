@@ -8,8 +8,6 @@ class Settings(BaseSettings):
 
     database_url: str = "postgresql+psycopg://pennylane:pennylane@localhost:5432/pennylane"
     database_url_test: str = "postgresql+psycopg://pennylane:pennylane@localhost:5432/pennylane_test"
-    quota_conversations_per_hour: int = 5
-    quota_messages_per_hour: int = 30
 
 
 settings = Settings()
