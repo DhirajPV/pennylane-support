@@ -220,3 +220,4 @@ __marimo__/
 # Local working notes, not part of the submission
 CLAUDE.md
 .claude/
+.claude/worktrees/
