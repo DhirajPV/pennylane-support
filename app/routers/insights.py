@@ -8,41 +8,17 @@ priority are zero-filled from enums.py, so an empty backlog still returns every 
 from decimal import Decimal
 from typing import Annotated, Any
 
-from fastapi import APIRouter, Depends, Header, HTTPException, status
-from sqlalchemy import select
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app import insights_sql
 from app.db import get_db
-from app.enums import (
-    CONVERSATION_PRIORITIES,
-    CONVERSATION_STATUSES,
-    STAFF_ROLES,
-    TERMINAL_STATUSES,
-)
-from app.models import User
+from app.deps import StaffUser
+from app.enums import CONVERSATION_PRIORITIES, CONVERSATION_STATUSES, TERMINAL_STATUSES
 
 router = APIRouter(tags=["insights"])
 
 NON_TERMINAL_STATUSES = tuple(s for s in CONVERSATION_STATUSES if s not in TERMINAL_STATUSES)
-
-
-# TODO(wave 2): drop this for deps.require_staff, which is the same rule for every router.
-def require_staff(
-    db: Annotated[Session, Depends(get_db)],
-    x_user: Annotated[str | None, Header(alias="X-User")] = None,
-) -> User:
-    """X-User must name a real user, and that user must hold a staff role."""
-    if x_user is None:
-        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "X-User header is required")
-
-    user = db.execute(select(User).where(User.handle == x_user)).scalar_one_or_none()
-    if user is None:
-        raise HTTPException(status.HTTP_401_UNAUTHORIZED, f"unknown user: {x_user}")
-    if user.role not in STAFF_ROLES:
-        raise HTTPException(status.HTTP_403_FORBIDDEN, "insights are staff only")
-
-    return user
 
 
 def _number(value: Any) -> float | int | None:
@@ -168,7 +144,7 @@ def _data_quality(db: Session) -> dict[str, Any]:
 @router.get("/insights", summary="Support insights dashboard (staff only)")
 def read_insights(
     db: Annotated[Session, Depends(get_db)],
-    _staff: Annotated[User, Depends(require_staff)],
+    _staff: StaffUser,
 ) -> dict[str, Any]:
     return {
         "community": _community(db),

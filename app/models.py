@@ -215,6 +215,18 @@ class Message(Base):
 
     __table_args__ = (
         value_check("ck_messages_posted_as_role", "posted_as_role", enums.USER_ROLES),
+        # Mirrors the "message invariants" revision. Autogenerate does not diff CHECK
+        # constraints, so these live here to keep the model honest, not to be detected.
+        CheckConstraint("sequence_no >= 1", name="ck_messages_sequence_no_positive"),
+        CheckConstraint(
+            "upvotes >= 0 AND helpful_count >= 0", name="ck_messages_counters_non_negative"
+        ),
+        CheckConstraint(
+            "NOT (is_accepted AND sequence_no = 1)", name="ck_messages_accepted_not_first"
+        ),
+        CheckConstraint(
+            "NOT (is_accepted AND is_internal)", name="ck_messages_accepted_not_internal"
+        ),
         UniqueConstraint(
             "conversation_id", "sequence_no", name="uq_messages_conversation_id_sequence_no"
         ),

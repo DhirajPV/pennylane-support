@@ -116,11 +116,24 @@ def _upsert(session: Session, table: Table, rows: list[dict[str, Any]], *, key: 
 
 
 def _insert_ignore(session: Session, table: Table, rows: list[dict[str, Any]], *,
-                   key: list[str] | None = None) -> None:
-    """User-mutable data: INSERT ... ON CONFLICT DO NOTHING, batched."""
+                   key: list[str]) -> None:
+    """User-mutable data: drop the rows that are already there, then insert the rest.
+
+    The pre-select is what makes a forced re-seed free: Postgres draws from the sequence
+    before it detects a conflict, so ON CONFLICT DO NOTHING alone would push
+    conversations_id_seq 800 further ahead on every run and the next API-created
+    conversation would be CONV_1601. The ON CONFLICT clause stays as the backstop for a
+    row inserted between this select and the insert.
+    """
     if not rows:
         return
-    session.execute(insert(table).on_conflict_do_nothing(index_elements=key), rows)
+    existing = {
+        tuple(row) for row in session.execute(select(*(table.c[name] for name in key)))
+    }
+    fresh = [row for row in rows if tuple(row[name] for name in key) not in existing]
+    if not fresh:
+        return
+    session.execute(insert(table).on_conflict_do_nothing(index_elements=key), fresh)
 
 
 def _id_map(session: Session, table: Table, key: str) -> dict[str, int]:

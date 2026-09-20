@@ -23,14 +23,16 @@ PARAMS: dict[str, Any] = {
 }
 
 # Community vs staff. Provenance is the author's CURRENT users.role, not posted_as_role.
-# first_replies is the first visible reply by sequence_no whoever wrote it; the first_reply
-# section below asks a different question and adds a different-author rule.
+# first_replies uses the same definition as the first_reply section below -- earliest
+# visible message by someone other than the asker -- so the two sections cannot disagree
+# about which message was the first reply, or about how many conversations have one.
 COMMUNITY = text(
     """
     WITH visible AS (
         SELECT m.conversation_id,
                m.sequence_no,
                m.is_accepted,
+               m.author_id <> c.author_id AS by_other,
                u.role = ANY(:staff_roles) AS by_staff
         FROM messages m
         JOIN conversations c ON c.id = m.conversation_id
@@ -42,7 +44,7 @@ COMMUNITY = text(
     first_replies AS (
         SELECT DISTINCT ON (conversation_id) conversation_id, by_staff
         FROM visible
-        WHERE sequence_no > 1
+        WHERE by_other
         ORDER BY conversation_id, sequence_no
     )
     SELECT
