@@ -450,3 +450,57 @@ def load_challenge(db: Session, id: int, user: User | None) -> ChallengeDetail |
     if challenge is None:
         return None
     return ChallengeDetail.model_validate(challenge)
+
+
+from app.schemas import TagWithCounts
+
+
+def tag_counts_query(
+    db: Session,
+    user: User | None,
+    *,
+    limit: int,
+    offset: int,
+) -> tuple[list[TagWithCounts], int]:
+    """Every tag with its visible usage. Unused tags stay, at zero.
+
+    One grouped subquery per count, outer-joined onto tags: the counts are
+    independent, so joining the two link tables in one pass would multiply them.
+    """
+    conversation_counts = (
+        select(conversation_tags.c.tag_id.label("tag_id"), func.count().label("n"))
+        .join(Conversation, Conversation.id == conversation_tags.c.conversation_id)
+        .where(*conversation_filter(user))
+        .group_by(conversation_tags.c.tag_id)
+        .subquery()
+    )
+    challenge_counts = (
+        select(challenge_tags.c.tag_id.label("tag_id"), func.count().label("n"))
+        .join(Challenge, Challenge.id == challenge_tags.c.challenge_id)
+        # challenge_filter(None), not (user): the challenge side is published-only for
+        # every caller, so a staff reader must not find drafts in a tag count.
+        .where(*challenge_filter(None))
+        .group_by(challenge_tags.c.tag_id)
+        .subquery()
+    )
+    conversation_count = func.coalesce(conversation_counts.c.n, 0)
+    challenge_count = func.coalesce(challenge_counts.c.n, 0)
+
+    total = db.scalar(select(func.count()).select_from(Tag))
+    rows = db.execute(
+        select(Tag.id, Tag.name, conversation_count, challenge_count)
+        .outerjoin(conversation_counts, conversation_counts.c.tag_id == Tag.id)
+        .outerjoin(challenge_counts, challenge_counts.c.tag_id == Tag.id)
+        .order_by(conversation_count.desc(), challenge_count.desc(), Tag.name)
+        .limit(limit)
+        .offset(offset)
+    ).all()
+    return [
+        TagWithCounts(
+            id=id,
+            name=name,
+            conversation_count=conversations,
+            challenge_count=challenges,
+        )
+        for id, name, conversations, challenges in rows
+    ], total or 0

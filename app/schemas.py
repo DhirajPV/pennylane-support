@@ -201,3 +201,12 @@ class PatchConversation(RequestModel):
 
 class PatchMessage(RequestModel):
     is_spoiler: bool
+
+
+class TagWithCounts(TagOut):
+    """GET /tags. Both counts are visibility-filtered; see queries.tag_counts_query."""
+
+    #: visible conversations only; soft-deleted ones never count, for any caller
+    conversation_count: int
+    #: published challenges only, for any caller
+    challenge_count: int
