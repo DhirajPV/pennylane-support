@@ -126,7 +126,6 @@ def create_conversation(
             author_id=user.id,
             posted_as_role=user.role,
             body=payload.body,
-            is_spoiler=payload.is_spoiler,
             created_at=now,
         )
     )
@@ -165,7 +164,6 @@ def create_message(
             posted_as_role=user.role,
             body=payload.body,
             is_internal=payload.is_internal,
-            is_spoiler=bool(payload.is_spoiler),
             created_at=now,
         )
     )

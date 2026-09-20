@@ -5,28 +5,45 @@ from __future__ import annotations
 import re
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy import select
+from fastapi import APIRouter, Depends, HTTPException, Query, status
+from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.db import get_db
 from app.deps import StaffUser
 from app.models import User
-from app.schemas import CreateUser, UserOut, UserRole
+from app.schemas import CreateUser, Page, UserOut, UserRole
 
 router = APIRouter(prefix="/users", tags=["users"])
 
 DbSession = Annotated[Session, Depends(get_db)]
+Limit = Annotated[int, Query(ge=1, le=100)]
+Offset = Annotated[int, Query(ge=0)]
 
 HANDLE_PATTERN = re.compile(r"[a-z0-9_]{3,40}")
 LEARNER = "learner"
 
 
-@router.get("", response_model=list[UserOut], summary="Assignment picker (staff only)")
-def list_users(db: DbSession, _staff: StaffUser, role: UserRole | None = None) -> list[User]:
+@router.get("", response_model=Page[UserOut], summary="Assignment picker (staff only)")
+def list_users(
+    db: DbSession,
+    _staff: StaffUser,
+    role: UserRole | None = None,
+    limit: Limit = 20,
+    offset: Offset = 0,
+) -> Page[UserOut]:
     conditions = [User.role == role] if role is not None else []
-    return list(db.scalars(select(User).where(*conditions).order_by(User.handle)).all())
+    total = db.scalar(select(func.count()).select_from(User).where(*conditions))
+    users = db.scalars(
+        select(User).where(*conditions).order_by(User.handle).limit(limit).offset(offset)
+    ).all()
+    return Page(
+        items=[UserOut.model_validate(user) for user in users],
+        total=total,
+        limit=limit,
+        offset=offset,
+    )
 
 
 @router.post(

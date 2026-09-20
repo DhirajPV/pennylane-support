@@ -175,14 +175,11 @@ class CreateConversation(RequestModel):
     body: str = Field(min_length=1, max_length=MAX_BODY_CHARS)
     category: ConversationCategory
     priority: ConversationPriority = "medium"
-    is_spoiler: bool = False
 
 
 class CreateMessage(RequestModel):
     body: str = Field(min_length=1, max_length=MAX_BODY_CHARS)
     is_internal: bool = False
-    #: None leaves it to the 9b heuristic; an explicit value always wins
-    is_spoiler: bool | None = None
 
 
 class ReactionIn(RequestModel):

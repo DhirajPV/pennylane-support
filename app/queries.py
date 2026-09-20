@@ -34,6 +34,7 @@ from app.schemas import (
     MessageOut,
     MessagePage,
     TagOut,
+    TagWithCounts,
     UserOut,
 )
 from app.visibility import (
@@ -450,9 +451,6 @@ def load_challenge(db: Session, id: int, user: User | None) -> ChallengeDetail |
     if challenge is None:
         return None
     return ChallengeDetail.model_validate(challenge)
-
-
-from app.schemas import TagWithCounts
 
 
 def tag_counts_query(
