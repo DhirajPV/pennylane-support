@@ -19,6 +19,9 @@ RUN pip install --no-deps -e .
 
 COPY alembic.ini ./
 COPY alembic ./alembic
+# The entrypoint seeds, so the image carries the data it seeds from; compose bind-mounts
+# the tree over /app, which would otherwise be the only reason the seed finds them.
+COPY data ./data
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 

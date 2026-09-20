@@ -1,8 +1,8 @@
 """Every write on a conversation: create, reply, react, accept, patch, delete, restore.
 
-Each handler takes the conversation row with SELECT ... FOR UPDATE, re-reads the state
-it decides on inside that transaction, and answers with the detail reloaded after the
-commit rather than with the object it just mutated.
+Each handler takes the conversation row with SELECT ... FOR UPDATE and re-reads the
+state it decides on inside that transaction. A reply and a reaction answer with the one
+message they touched; everything else answers with the whole conversation.
 """
 
 from __future__ import annotations
@@ -10,10 +10,10 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Annotated, Any
 
-from fastapi import APIRouter, Depends, HTTPException, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Path, Response, status
 from sqlalchemy import delete, func, select
 from sqlalchemy.dialects.postgresql import insert
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from app import enums, ids, queries
 from app.db import get_db
@@ -23,6 +23,7 @@ from app.schemas import (
     ConversationDetail,
     CreateConversation,
     CreateMessage,
+    MessageOut,
     PatchConversation,
     ReactionIn,
     ReactionType,
@@ -32,6 +33,8 @@ from app.visibility import challenge_filter, is_staff, visible_message
 router = APIRouter(prefix="/conversations", tags=["conversations"])
 
 DbSession = Annotated[Session, Depends(get_db)]
+#: ids are bigserial, so 0 and negatives name nothing: 422 rather than a wasted query
+PathId = Annotated[int, Path(gt=0)]
 
 OPEN, ANSWERED, CLOSED = "open", "answered", "closed"
 LEARNER = "learner"
@@ -42,8 +45,13 @@ STAFF_ONLY_FIELDS = ("assignee_id", "priority", "is_pinned", "is_locked")
 
 
 def _now(db: Session) -> datetime:
-    """One transaction timestamp for every row a request writes."""
-    return db.scalar(select(func.now()))
+    """Wall-clock time for every row a request writes, read AFTER the row lock.
+
+    clock_timestamp(), not now(): now() is the transaction start, so a request that
+    queued on the lock would stamp its rows with a time from before the winner
+    committed, and last_activity_at would go backwards.
+    """
+    return db.scalar(select(func.clock_timestamp()))
 
 
 def _lock(
@@ -76,9 +84,9 @@ def _target_message(
 ) -> Message:
     """The message a nested path names: 404 unless it is in this conversation and visible."""
     message = db.scalars(
-        select(Message).where(
-            Message.id == message_id, Message.conversation_id == conversation.id
-        )
+        select(Message)
+        .options(joinedload(Message.author))
+        .where(Message.id == message_id, Message.conversation_id == conversation.id)
     ).one_or_none()
     if message is None or not visible_message(message, user, include_deleted=include_deleted):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "message not found")
@@ -86,6 +94,7 @@ def _target_message(
 
 
 def _detail(db: Session, conversation_id: int, user: User) -> ConversationDetail:
+    """The response, read back through the same transaction that wrote it."""
     detail = queries.load_conversation_detail(db, conversation_id, user)
     if detail is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "conversation not found")
@@ -129,18 +138,24 @@ def create_conversation(
             created_at=now,
         )
     )
+    db.flush()
+    detail = _detail(db, conversation_id, user)
     db.commit()
-    return _detail(db, conversation_id, user)
+    return detail
 
 
 @router.post(
     "/{conversation_id}/messages",
-    response_model=ConversationDetail,
+    response_model=MessageOut,
     status_code=status.HTTP_201_CREATED,
 )
 def create_message(
-    conversation_id: int, payload: CreateMessage, user: RequiredUser, db: DbSession
-) -> ConversationDetail:
+    conversation_id: PathId,
+    payload: CreateMessage,
+    user: RequiredUser,
+    db: DbSession,
+    response: Response,
+) -> MessageOut:
     if payload.is_internal and not is_staff(user):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "internal messages are staff only")
 
@@ -156,32 +171,40 @@ def create_message(
         )
     )
     now = _now(db)
-    db.add(
-        Message(
-            conversation_id=conversation_id,
-            sequence_no=(last_sequence_no or 0) + 1,
-            author_id=user.id,
-            posted_as_role=user.role,
-            body=payload.body,
-            is_internal=payload.is_internal,
-            created_at=now,
-        )
+    sequence_no = (last_sequence_no or 0) + 1
+    message = Message(
+        conversation_id=conversation_id,
+        sequence_no=sequence_no,
+        author=user,
+        posted_as_role=user.role,
+        body=payload.body,
+        is_internal=payload.is_internal,
+        created_at=now,
     )
+    db.add(message)
     conversation.last_activity_at = now
+    db.flush()
+    created = queries.message_out(db, message, user)
     db.commit()
-    return _detail(db, conversation_id, user)
+    # The one-item page that contains exactly this reply, so a client can re-fetch it
+    # without paging the whole thread.
+    response.headers["Location"] = (
+        f"/conversations/{conversation_id}/messages"
+        f"?after_sequence={sequence_no - 1}&limit=1"
+    )
+    return created
 
 
 @router.post(
-    "/{conversation_id}/messages/{message_id}/reactions", response_model=ConversationDetail
+    "/{conversation_id}/messages/{message_id}/reactions", response_model=MessageOut
 )
 def add_reaction(
-    conversation_id: int,
-    message_id: int,
+    conversation_id: PathId,
+    message_id: PathId,
     payload: ReactionIn,
     user: RequiredUser,
     db: DbSession,
-) -> ConversationDetail:
+) -> MessageOut:
     conversation = _lock(db, conversation_id, user)
     message = _target_message(db, conversation, message_id, user)
     db.execute(
@@ -189,21 +212,23 @@ def add_reaction(
         .values(user_id=user.id, message_id=message.id, type=payload.type)
         .on_conflict_do_nothing()
     )
+    db.flush()
+    reacted = queries.message_out(db, message, user)
     db.commit()
-    return _detail(db, conversation_id, user)
+    return reacted
 
 
 @router.delete(
     "/{conversation_id}/messages/{message_id}/reactions/{reaction_type}",
-    response_model=ConversationDetail,
+    response_model=MessageOut,
 )
 def remove_reaction(
-    conversation_id: int,
-    message_id: int,
+    conversation_id: PathId,
+    message_id: PathId,
     reaction_type: ReactionType,
     user: RequiredUser,
     db: DbSession,
-) -> ConversationDetail:
+) -> MessageOut:
     conversation = _lock(db, conversation_id, user)
     message = _target_message(db, conversation, message_id, user)
     db.execute(
@@ -213,15 +238,17 @@ def remove_reaction(
             MessageReaction.type == reaction_type,
         )
     )
+    db.flush()
+    reacted = queries.message_out(db, message, user)
     db.commit()
-    return _detail(db, conversation_id, user)
+    return reacted
 
 
 @router.post(
     "/{conversation_id}/messages/{message_id}/accept", response_model=ConversationDetail
 )
 def accept_message(
-    conversation_id: int, message_id: int, user: RequiredUser, db: DbSession
+    conversation_id: PathId, message_id: PathId, user: RequiredUser, db: DbSession
 ) -> ConversationDetail:
     conversation = _lock(db, conversation_id, user)
     message = _target_message(db, conversation, message_id, user)
@@ -254,8 +281,10 @@ def accept_message(
     message.is_accepted = True
     if conversation.status == OPEN:
         conversation.status = ANSWERED
+    db.flush()
+    detail = _detail(db, conversation_id, user)
     db.commit()
-    return _detail(db, conversation_id, user)
+    return detail
 
 
 def _authorize_author_patch(
@@ -296,7 +325,7 @@ def _apply_status(conversation: Conversation, new_status: str, now: datetime) ->
 
 @router.patch("/{conversation_id}", response_model=ConversationDetail)
 def patch_conversation(
-    conversation_id: int, payload: PatchConversation, user: RequiredUser, db: DbSession
+    conversation_id: PathId, payload: PatchConversation, user: RequiredUser, db: DbSession
 ) -> ConversationDetail:
     conversation = _lock(db, conversation_id, user)
     # assignee_id is the one field whose null is a value: it unassigns.
@@ -314,12 +343,14 @@ def patch_conversation(
         _apply_status(conversation, changes.pop("status"), _now(db))
     for field, value in changes.items():
         setattr(conversation, field, value)
+    db.flush()
+    detail = _detail(db, conversation_id, user)
     db.commit()
-    return _detail(db, conversation_id, user)
+    return detail
 
 
 @router.delete("/{conversation_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_conversation(conversation_id: int, staff: StaffUser, db: DbSession) -> Response:
+def delete_conversation(conversation_id: PathId, staff: StaffUser, db: DbSession) -> Response:
     conversation = _lock(db, conversation_id, staff, allow_deleted=True)
     if conversation.deleted_at is None:
         conversation.deleted_at = _now(db)
@@ -329,19 +360,21 @@ def delete_conversation(conversation_id: int, staff: StaffUser, db: DbSession) -
 
 @router.post("/{conversation_id}/restore", response_model=ConversationDetail)
 def restore_conversation(
-    conversation_id: int, staff: StaffUser, db: DbSession
+    conversation_id: PathId, staff: StaffUser, db: DbSession
 ) -> ConversationDetail:
     conversation = _lock(db, conversation_id, staff, allow_deleted=True)
     conversation.deleted_at = None
+    db.flush()
+    detail = _detail(db, conversation_id, staff)
     db.commit()
-    return _detail(db, conversation_id, staff)
+    return detail
 
 
 @router.delete(
     "/{conversation_id}/messages/{message_id}", status_code=status.HTTP_204_NO_CONTENT
 )
 def delete_message(
-    conversation_id: int, message_id: int, staff: StaffUser, db: DbSession
+    conversation_id: PathId, message_id: PathId, staff: StaffUser, db: DbSession
 ) -> Response:
     conversation = _lock(db, conversation_id, staff)
     # include_deleted, so deleting twice is 204 rather than 404.

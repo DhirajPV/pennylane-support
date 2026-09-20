@@ -45,6 +45,7 @@ def _open_conversation(client: Clients, author: str) -> dict:
 
 
 def _post(client: Clients, handle: str, conversation_id: int, **payload: object) -> dict:
+    """The created message: a reply answers with itself, not with the thread."""
     response = client(handle).post(
         f"/conversations/{conversation_id}/messages",
         json={"body": "See the note below.", **payload},
@@ -70,7 +71,7 @@ def test_an_internal_message_is_invisible_to_anonymous_and_learner_callers(
     opened = _open_conversation(client, author)
     conversation_id = opened["id"]
     opening_id = _message(opened, 1)["id"]
-    internal = _message(_post(client, STAFF_HANDLE, conversation_id, is_internal=True), 2)
+    internal = _post(client, STAFF_HANDLE, conversation_id, is_internal=True)
     internal_id = internal["id"]
     assert internal["is_internal"] is True
 
@@ -93,7 +94,7 @@ def test_a_learner_holding_an_internal_message_id_cannot_reach_it(client: Client
     # ownership: whatever is refused is refused because the message is not visible.
     author = _new_learner(client)
     conversation_id = _open_conversation(client, author)["id"]
-    internal = _message(_post(client, STAFF_HANDLE, conversation_id, is_internal=True), 2)
+    internal = _post(client, STAFF_HANDLE, conversation_id, is_internal=True)
     internal_id = internal["id"]
     assert internal["is_internal"] is True
 
@@ -120,7 +121,7 @@ def test_a_message_id_from_another_conversation_is_404(client: Clients) -> None:
 
     conversation_id = _open_conversation(client, author)["id"]
     other_id = _open_conversation(client, author)["id"]
-    foreign_id = _message(_post(client, helper, other_id), 2)["id"]
+    foreign_id = _post(client, helper, other_id)["id"]
 
     # Nested message ids only appear on writes, which need an X-User; anonymous never
     # gets as far as the id.
@@ -177,7 +178,7 @@ def test_message_count_follows_the_caller_after_a_message_is_deleted(
     staff = client(STAFF_HANDLE)
 
     conversation_id = _open_conversation(client, author)["id"]
-    doomed_id = _message(_post(client, helper, conversation_id), 2)["id"]
+    doomed_id = _post(client, helper, conversation_id)["id"]
     _post(client, helper, conversation_id)
 
     before = client(author).get(f"/conversations/{conversation_id}")

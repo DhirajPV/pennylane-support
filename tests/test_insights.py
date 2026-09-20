@@ -45,9 +45,12 @@ def test_seeded_insights(
         community["accepted_answers"]["total"],
     ) == (269, 88, 357)
     assert (community["replies"]["community"], community["replies"]["total"]) == (
-        1725,
-        2261,
+        1640,
+        2150,
     )
+    # Replies are messages by someone other than the asker; the asker's own follow-ups
+    # are the difference between 2150 and the 2261 messages after sequence 1.
+    assert community["asker_follow_ups"] == 111
     assert (
         community["first_replies"]["community"],
         community["first_replies"]["total"],
@@ -94,9 +97,7 @@ def test_one_community_reply_moves_one_number(
         json={"body": "Broadcast the parameters instead."},
     )
     assert replied.status_code == 201
-    reply_id = next(
-        m["id"] for m in replied.json()["messages"] if m["sequence_no"] == 2
-    )
+    reply_id = replied.json()["id"]
 
     internal = client(staff).post(
         f"/conversations/{conversation_id}/messages",

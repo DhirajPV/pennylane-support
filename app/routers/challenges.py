@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Path, Query
 from fastapi import status as http_status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -25,6 +25,7 @@ from app.queries import (
     load_challenge,
 )
 from app.schemas import (
+    MAX_SEARCH_CHARS,
     ChallengeDetail,
     ChallengeDifficulty,
     ChallengeListItem,
@@ -42,6 +43,8 @@ BrowseSort = Literal[*tuple(sort for sort in CONVERSATION_SORTS if sort != "prio
 
 Limit = Annotated[int, Query(ge=1, le=100)]
 Offset = Annotated[int, Query(ge=0)]
+PathId = Annotated[int, Path(gt=0)]
+Search = Annotated[str | None, Query(max_length=MAX_SEARCH_CHARS)]
 
 
 @router.get("", response_model=Page[ChallengeListItem], summary="List challenges")
@@ -73,7 +76,7 @@ def list_challenges(
 
 @router.get("/{challenge_id}", response_model=ChallengeDetail, summary="One challenge")
 def read_challenge(
-    challenge_id: int,
+    challenge_id: PathId,
     db: Annotated[Session, Depends(get_db)],
     user: CurrentUser,
 ) -> ChallengeDetail:
@@ -90,10 +93,10 @@ def read_challenge(
     summary="Conversations opened on one challenge",
 )
 def list_challenge_conversations(
-    challenge_id: int,
+    challenge_id: PathId,
     db: Annotated[Session, Depends(get_db)],
     user: CurrentUser,
-    q: str | None = None,
+    q: Search = None,
     status: ConversationStatus | None = None,
     has_accepted: bool | None = None,
     sort: BrowseSort = "activity",

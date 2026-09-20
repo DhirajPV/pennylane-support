@@ -1,11 +1,15 @@
 """FastAPI application: routers and /health."""
 
+import logging
+
 from fastapi import FastAPI, status
 from fastapi.responses import JSONResponse
 from sqlalchemy import text
 
 from app.db import engine
 from app.routers import routers
+
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="PennyLane support platform",
@@ -19,14 +23,20 @@ for router in routers:
 
 @app.get("/health", tags=["meta"])
 def health() -> JSONResponse:
-    """Liveness plus a database round-trip."""
+    """Liveness plus a database round-trip.
+
+    The failure body is fixed text. A driver exception carries the host, port, user
+    and often the database name of whatever it failed to reach, and /health is the one
+    endpoint that is unauthenticated by design; the detail goes to the log instead.
+    """
     try:
         with engine.connect() as connection:
             connection.execute(text("SELECT 1"))
-    except Exception as exc:
+    except Exception:
+        logger.exception("health check failed: database unreachable")
         return JSONResponse(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            content={"status": "unhealthy", "database": "unreachable", "detail": str(exc)},
+            content={"status": "degraded", "database": "unavailable"},
         )
 
     return JSONResponse(content={"status": "ok", "database": "ok"})

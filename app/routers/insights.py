@@ -54,6 +54,8 @@ def _community(db: Session) -> dict[str, Any]:
         "accepted_answers": _split(row["accepted_community"], row["accepted_staff"]),
         "replies": _split(row["replies_community"], row["replies_staff"]),
         "first_replies": _split(row["first_replies_community"], row["first_replies_staff"]),
+        #: not replies (same author as the asker), reported so the number stays visible
+        "asker_follow_ups": row["asker_follow_ups"],
     }
 
 
@@ -141,11 +143,25 @@ def _data_quality(db: Session) -> dict[str, Any]:
     return dict(row)
 
 
+def _one_snapshot(db: Session) -> None:
+    """Put every section on one REPEATABLE READ snapshot.
+
+    Eight statements at READ COMMITTED would each see their own snapshot, so a reply
+    landing mid-request could be counted by one section and not the next. The rollback
+    is what makes the SET possible: get_current_user has already read users, and the
+    isolation level can only be chosen before a transaction takes its first statement.
+    Nothing has been written, so there is nothing to lose.
+    """
+    db.rollback()
+    db.connection(execution_options={"isolation_level": "REPEATABLE READ"})
+
+
 @router.get("/insights", summary="Support insights dashboard (staff only)")
 def read_insights(
     db: Annotated[Session, Depends(get_db)],
     _staff: StaffUser,
 ) -> dict[str, Any]:
+    _one_snapshot(db)
     return {
         "community": _community(db),
         "top_contributors": _top_contributors(db),

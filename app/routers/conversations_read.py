@@ -8,9 +8,9 @@ from __future__ import annotations
 
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Path, Query
 from fastapi import status as http_status
-from sqlalchemy import select, update
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.db import get_db
@@ -24,6 +24,7 @@ from app.queries import (
     page_messages,
 )
 from app.schemas import (
+    MAX_SEARCH_CHARS,
     ConversationDetail,
     ConversationListItem,
     ConversationPriority,
@@ -42,6 +43,9 @@ MESSAGE_PAGE_MAX = 200
 
 Limit = Annotated[int, Query(ge=1, le=100)]
 Offset = Annotated[int, Query(ge=0)]
+#: ids are bigserial, so 0 and negatives name nothing: 422 rather than a wasted query
+PathId = Annotated[int, Path(gt=0)]
+Search = Annotated[str | None, Query(max_length=MAX_SEARCH_CHARS)]
 
 
 def _visible_or_404(
@@ -62,7 +66,7 @@ def _visible_or_404(
 def list_conversations(
     db: Annotated[Session, Depends(get_db)],
     user: CurrentUser,
-    q: str | None = None,
+    q: Search = None,
     status: ConversationStatus | None = None,
     priority: ConversationPriority | None = None,
     assignee: str | None = None,
@@ -107,13 +111,19 @@ def list_conversations(
     "/{conversation_id}", response_model=ConversationDetail, summary="One conversation"
 )
 def read_conversation(
-    conversation_id: int,
+    conversation_id: PathId,
     db: Annotated[Session, Depends(get_db)],
     user: CurrentUser,
     include_deleted: bool = False,
     reveal_spoilers: bool = False,
 ) -> ConversationDetail:
-    """First 50 messages by sequence_no. Increments view_count, so it is not idempotent."""
+    """First 50 messages by sequence_no. A pure read: view_count is not touched.
+
+    view_count is the snapshot that came with the import, not a live counter. Writing
+    to a row on every GET makes the endpoint non-idempotent, turns every read into a
+    row lock on the hottest conversations, and still counts only what the API serves.
+    A real view count is an events table; README says so.
+    """
     detail = load_conversation_detail(
         db,
         conversation_id,
@@ -123,16 +133,6 @@ def read_conversation(
     )
     if detail is None:
         raise HTTPException(http_status.HTTP_404_NOT_FOUND, "conversation not found")
-
-    # RETURNING, so the body reports the count this read just stored rather than the
-    # one it loaded a statement earlier.
-    detail.view_count = db.execute(
-        update(Conversation)
-        .where(Conversation.id == conversation_id)
-        .values(view_count=Conversation.view_count + 1)
-        .returning(Conversation.view_count)
-    ).scalar_one()
-    db.commit()
     return detail
 
 
@@ -142,7 +142,7 @@ def read_conversation(
     summary="Page a conversation's messages",
 )
 def list_messages(
-    conversation_id: int,
+    conversation_id: PathId,
     db: Annotated[Session, Depends(get_db)],
     user: CurrentUser,
     after_sequence: Annotated[int | None, Query(ge=0)] = None,

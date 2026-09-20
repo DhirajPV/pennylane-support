@@ -23,9 +23,9 @@ PARAMS: dict[str, Any] = {
 }
 
 # Community vs staff. Provenance is the author's CURRENT users.role, not posted_as_role.
-# first_replies uses the same definition as the first_reply section below -- earliest
-# visible message by someone other than the asker -- so the two sections cannot disagree
-# about which message was the first reply, or about how many conversations have one.
+# replies and first_replies both use the reply definition in CLAUDE.md: a message by
+# someone other than the asker. A follow-up the asker adds to their own thread is not a
+# reply to it, so it is reported separately as asker_follow_ups rather than dropped.
 COMMUNITY = text(
     """
     WITH visible AS (
@@ -50,8 +50,9 @@ COMMUNITY = text(
     SELECT
         count(*) FILTER (WHERE is_accepted AND NOT by_staff) AS accepted_community,
         count(*) FILTER (WHERE is_accepted AND by_staff) AS accepted_staff,
-        count(*) FILTER (WHERE sequence_no > 1 AND NOT by_staff) AS replies_community,
-        count(*) FILTER (WHERE sequence_no > 1 AND by_staff) AS replies_staff,
+        count(*) FILTER (WHERE by_other AND NOT by_staff) AS replies_community,
+        count(*) FILTER (WHERE by_other AND by_staff) AS replies_staff,
+        count(*) FILTER (WHERE sequence_no > 1 AND NOT by_other) AS asker_follow_ups,
         (SELECT count(*) FROM first_replies WHERE NOT by_staff) AS first_replies_community,
         (SELECT count(*) FROM first_replies WHERE by_staff) AS first_replies_staff
     FROM visible

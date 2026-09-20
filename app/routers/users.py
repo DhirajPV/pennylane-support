@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import re
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
@@ -21,7 +20,6 @@ DbSession = Annotated[Session, Depends(get_db)]
 Limit = Annotated[int, Query(ge=1, le=100)]
 Offset = Annotated[int, Query(ge=0)]
 
-HANDLE_PATTERN = re.compile(r"[a-z0-9_]{3,40}")
 LEARNER = "learner"
 
 
@@ -53,11 +51,7 @@ def list_users(
     summary="Create a learner; no auth needed",
 )
 def create_user(payload: CreateUser, db: DbSession) -> User:
-    if HANDLE_PATTERN.fullmatch(payload.handle) is None:
-        raise HTTPException(
-            status.HTTP_422_UNPROCESSABLE_ENTITY, "handle must match [a-z0-9_]{3,40}"
-        )
-
+    # The handle pattern is CreateUser's, so a bad handle is 422 before this runs.
     user = User(handle=payload.handle, role=LEARNER)
     db.add(user)
     try:

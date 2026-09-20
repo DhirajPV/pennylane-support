@@ -120,6 +120,18 @@ def _message_out(
     )
 
 
+def message_out(
+    db: Session,
+    message: Message,
+    user: User | None,
+    *,
+    reveal_spoilers: bool = False,
+) -> MessageOut:
+    """One message in response shape. `message.author` must already be loaded."""
+    rollup = _reaction_rollup(db, [message.id], user)
+    return _message_out(message, rollup, user, reveal_spoilers)
+
+
 def _conversation_columns(conversation: Conversation) -> dict[str, Any]:
     """The fields both conversation shapes share; the caller adds the derived counts."""
     return {
@@ -254,6 +266,53 @@ def _message_stats(user: User | None, *, include_deleted: bool):
     )
 
 
+def _page_stats(
+    db: Session,
+    conversation_ids: list[int],
+    user: User | None,
+    *,
+    include_deleted: bool,
+) -> dict[int, tuple[int, int, bool]]:
+    """message_count, helpful_total and has_accepted for one page of conversations.
+
+    Scoped to the ids the page returned. Aggregating every visible message is the
+    expensive half of this endpoint, and a page of 20 needs 20 rows of it.
+    """
+    if not conversation_ids:
+        return {}
+    live_helpful = (
+        select(
+            MessageReaction.message_id.label("message_id"),
+            func.count().label("live"),
+        )
+        .where(
+            MessageReaction.type == HELPFUL,
+            MessageReaction.message_id.in_(
+                select(Message.id).where(Message.conversation_id.in_(conversation_ids))
+            ),
+        )
+        .group_by(MessageReaction.message_id)
+        .subquery()
+    )
+    rows = db.execute(
+        select(
+            Message.conversation_id,
+            func.count(Message.id),
+            func.coalesce(func.sum(Message.helpful_count), 0)
+            + func.coalesce(func.sum(live_helpful.c.live), 0),
+            func.bool_or(Message.is_accepted),
+        )
+        .select_from(Message)
+        .outerjoin(live_helpful, live_helpful.c.message_id == Message.id)
+        .where(
+            Message.conversation_id.in_(conversation_ids),
+            *message_filter(user, include_deleted=include_deleted),
+        )
+        .group_by(Message.conversation_id)
+    ).all()
+    return {row[0]: (row[1], row[2], row[3]) for row in rows}
+
+
 def conversation_list_query(
     db: Session,
     user: User | None,
@@ -269,8 +328,15 @@ def conversation_list_query(
     filters: q, status, priority, assignee (handle), challenge_id, tag (name),
     has_accepted, unassigned. Rejecting unassigned together with assignee is the
     router's 422, not this function's.
+
+    The whole-table message aggregate is built only when something needs it to choose
+    rows: the has_accepted filter, or sort=helpful, which orders across the whole
+    filtered set. Otherwise neither the page nor the total touches messages, and the
+    page's own counts come from _page_stats afterwards.
     """
-    stats = _message_stats(user, include_deleted=include_deleted)
+    needs_stats_filter = filters.get("has_accepted") is not None
+    needs_stats = needs_stats_filter or sort == "helpful"
+    stats = _message_stats(user, include_deleted=include_deleted) if needs_stats else None
     conditions: list[ColumnElement[bool]] = [
         *conversation_filter(user, include_deleted=include_deleted)
     ]
@@ -300,7 +366,7 @@ def conversation_list_query(
             .exists()
         )
     if (has_accepted := filters.get("has_accepted")) is not None:
-        conditions.append(func.coalesce(stats.c.has_accepted, False).is_(bool(has_accepted)))
+        conditions.append(func.coalesce(stats.c.has_accepted, False).is_(bool(has_accepted)))  # type: ignore[union-attr]
     if filters.get("unassigned"):
         conditions.append(Conversation.assignee_id.is_(None))
 
@@ -315,36 +381,40 @@ def conversation_list_query(
     else:
         order = (pinned_first, Conversation.last_activity_at.desc())
 
-    total = db.scalar(
-        select(func.count())
-        .select_from(Conversation)
-        .outerjoin(stats, stats.c.conversation_id == Conversation.id)
-        .where(*conditions)
-    )
-    rows = db.execute(
-        select(
-            Conversation,
-            func.coalesce(stats.c.message_count, 0),
-            func.coalesce(stats.c.helpful_total, 0),
-            func.coalesce(stats.c.has_accepted, False),
-        )
-        .options(*_conversation_eager_loads())
-        .outerjoin(stats, stats.c.conversation_id == Conversation.id)
-        .where(*conditions)
-        .order_by(*order, Conversation.id.desc())
-        .limit(limit)
-        .offset(offset)
-    ).all()
+    counted = select(func.count()).select_from(Conversation)
+    page = select(Conversation).options(*_conversation_eager_loads())
+    if needs_stats_filter:
+        counted = counted.outerjoin(stats, stats.c.conversation_id == Conversation.id)
+    if needs_stats:
+        page = page.outerjoin(stats, stats.c.conversation_id == Conversation.id)
 
-    items = [
-        ConversationListItem(
-            **_conversation_columns(conversation),
-            message_count=message_count,
-            helpful_total=helpful_total,
-            has_accepted=accepted,
+    total = db.scalar(counted.where(*conditions))
+    conversations = list(
+        db.scalars(
+            page.where(*conditions)
+            .order_by(*order, Conversation.id.desc())
+            .limit(limit)
+            .offset(offset)
+        ).all()
+    )
+
+    counts = _page_stats(
+        db,
+        [conversation.id for conversation in conversations],
+        user,
+        include_deleted=include_deleted,
+    )
+    items = []
+    for conversation in conversations:
+        message_count, helpful_total, accepted = counts.get(conversation.id, (0, 0, False))
+        items.append(
+            ConversationListItem(
+                **_conversation_columns(conversation),
+                message_count=message_count,
+                helpful_total=helpful_total,
+                has_accepted=accepted,
+            )
         )
-        for conversation, message_count, helpful_total, accepted in rows
-    ]
     return items, total or 0
 
 

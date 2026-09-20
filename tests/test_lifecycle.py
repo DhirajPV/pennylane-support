@@ -52,16 +52,13 @@ def _open_conversation(client: Clients, author: str) -> dict:
 
 
 def _reply(client: Clients, handle: str, conversation_id: int) -> dict:
+    """The created message: a reply answers with itself, not with the thread."""
     response = client(handle).post(
         f"/conversations/{conversation_id}/messages",
         json={"body": "Your parameters are probably not `requires_grad`."},
     )
     assert response.status_code == 201, response.text
     return response.json()
-
-
-def _message(detail: dict, sequence_no: int) -> dict:
-    return next(m for m in detail["messages"] if m["sequence_no"] == sequence_no)
 
 
 def _moment(value: str) -> datetime:
@@ -78,7 +75,7 @@ def test_open_to_closed_resolves_once(client: Clients) -> None:
     assert opened["status"] == "open"
     assert opened["resolved_at"] is None
 
-    answer_id = _message(_reply(client, helper, conversation_id), 2)["id"]
+    answer_id = _reply(client, helper, conversation_id)["id"]
 
     accepted = client(author).post(
         f"/conversations/{conversation_id}/messages/{answer_id}/accept"
@@ -159,7 +156,7 @@ def test_a_locked_conversation_refuses_a_reply_but_allows_a_reaction(
     staff = client(STAFF_HANDLE)
 
     conversation_id = _open_conversation(client, author)["id"]
-    answer_id = _message(_reply(client, helper, conversation_id), 2)["id"]
+    answer_id = _reply(client, helper, conversation_id)["id"]
 
     locked = staff.patch(f"/conversations/{conversation_id}", json={"is_locked": True})
     assert locked.status_code == 200, locked.text
@@ -175,4 +172,4 @@ def test_a_locked_conversation_refuses_a_reply_but_allows_a_reaction(
         json={"type": "helpful"},
     )
     assert reaction.status_code == 200, reaction.text
-    assert _message(reaction.json(), 2)["my_reactions"] == ["helpful"]
+    assert reaction.json()["my_reactions"] == ["helpful"]

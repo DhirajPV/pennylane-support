@@ -1,6 +1,9 @@
 # Every target is a docker compose command: the only prerequisite is Docker.
 COMPOSE ?= docker compose
 
+# `exec` does not forward the host environment, so the seed's one gate is passed through.
+FORCE_SEED ?= 0
+
 .PHONY: up down reset migrate seed test logs psql
 
 up:       ## Build and start the stack; API on http://localhost:8000/docs
@@ -15,11 +18,11 @@ reset:    ## Stop the stack and delete the database volume
 migrate:  ## Run migrations against the running stack
 	$(COMPOSE) exec app alembic upgrade head
 
-seed:     ## Run the seed against the running stack
-	$(COMPOSE) exec app python -m app.seed.load
+seed:     ## Run the seed against the running stack (FORCE_SEED=1 re-runs it)
+	$(COMPOSE) exec -e FORCE_SEED=$(FORCE_SEED) app python -m app.seed.load
 
-test:     ## Run pytest in a one-off container, after migrations
-	$(COMPOSE) run --rm -e SKIP_SEED=1 app pytest
+test:     ## Run pytest in a one-off container; the tests own pennylane_test
+	$(COMPOSE) run --rm --entrypoint pytest app
 
 logs:     ## Follow the app logs
 	$(COMPOSE) logs -f app

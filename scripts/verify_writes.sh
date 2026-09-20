@@ -15,15 +15,18 @@ echo "$C" | jq -c '{external_id, status, message_count}'
 ID=$(echo "$C" | jq -r .id)
 [ -n "$ID" ] && [ "$ID" != "null" ] || { echo "create failed: $C"; exit 1; }
 
-say "2. public reply from another learner  (expect message_count 2)"
-R=$(curl -s -X POST "$BASE/conversations/$ID/messages" -H 'X-User: gpu_user' -H "$J" -d '{"body":"Your first layer has no trainable parameters."}')
-echo "$R" | jq -c '{message_count, last_activity_at}'
-MID=$(echo "$R" | jq -r '.messages[-1].id')
+say "2. public reply from another learner  (expect sequence_no 2, a Location header, then message_count 2)"
+H=$(mktemp)
+R=$(curl -s -D "$H" -X POST "$BASE/conversations/$ID/messages" -H 'X-User: gpu_user' -H "$J" -d '{"body":"Your first layer has no trainable parameters."}')
+echo "$R" | jq -c '{id, sequence_no, is_internal}'
+grep -i '^location:' "$H"; rm -f "$H"
+curl -s "$BASE/conversations/$ID" | jq -c '{message_count, last_activity_at}'
+MID=$(echo "$R" | jq -r .id)
 
 say "3. internal note: staff -> message_count 3; learner posting internal -> 403; anonymous sees 2; accepting the note -> 422"
 N=$(curl -s -X POST "$BASE/conversations/$ID/messages" -H 'X-User: pennylane_support' -H "$J" -d '{"body":"Internal: third report this week.","is_internal":true}')
-echo "$N" | jq .message_count
-NOTE=$(echo "$N" | jq -r '.messages[] | select(.is_internal) | .id')
+NOTE=$(echo "$N" | jq -r .id)
+curl -s "$BASE/conversations/$ID" -H 'X-User: pennylane_support' | jq .message_count
 code -X POST "$BASE/conversations/$ID/messages" -H 'X-User: gpu_user' -H "$J" -d '{"body":"x","is_internal":true}'
 curl -s "$BASE/conversations/$ID" | jq .message_count
 code -X POST "$BASE/conversations/$ID/messages/$NOTE/accept" -H 'X-User: pennylane_support'
@@ -32,7 +35,7 @@ code -X POST "$BASE/conversations/$ID/messages/$NOTE/reactions" -H 'X-User: gpu_
 say "4. react helpful twice  (expect helpful_count 1 both times, my_reactions [\"helpful\"])"
 for i in 1 2; do
   curl -s -X POST "$BASE/conversations/$ID/messages/$MID/reactions" -H 'X-User: quantum_learner42' -H "$J" -d '{"type":"helpful"}' \
-    | jq -c ".messages[] | select(.id==$MID) | {helpful_count, my_reactions}"
+    | jq -c '{id, helpful_count, my_reactions}'
 done
 
 say "5. accept  (expect answered, accepted_message_id == $MID)"

@@ -9,15 +9,16 @@ the forum's taxonomy, not a constrained set (see enums.py); only POST
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Generic, Literal, TypeVar
+from typing import Annotated, Any, Generic, Literal, TypeVar
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import AfterValidator, BaseModel, ConfigDict, Field, model_validator
 
 from app import enums
 
 MAX_BODY_CHARS = 20_000
 MAX_TOPIC_CHARS = 300
-MAX_HANDLE_CHARS = 100
+MAX_SEARCH_CHARS = 200
+HANDLE_PATTERN = r"^[a-z0-9_]{3,40}$"
 
 ContentFormat = Literal["markdown"]
 MARKDOWN: ContentFormat = "markdown"
@@ -31,6 +32,18 @@ ConversationPriority = Literal[*enums.CONVERSATION_PRIORITIES]
 ConversationCategory = Literal[*enums.CONVERSATION_CATEGORIES]
 
 T = TypeVar("T")
+
+
+def _not_blank(value: str) -> str:
+    """Trim, then insist something is left: a topic of spaces is not a topic."""
+    trimmed = value.strip()
+    if not trimmed:
+        raise ValueError("must not be blank")
+    return trimmed
+
+
+Topic = Annotated[str, Field(max_length=MAX_TOPIC_CHARS), AfterValidator(_not_blank)]
+Body = Annotated[str, Field(max_length=MAX_BODY_CHARS), AfterValidator(_not_blank)]
 
 
 class ResponseModel(BaseModel):
@@ -143,6 +156,7 @@ class ConversationListItem(ResponseModel):
     priority: ConversationPriority
     is_pinned: bool
     is_locked: bool
+    #: the imported snapshot; no endpoint increments it (see conversations_read)
     view_count: int
     challenge: ChallengeSummary
     author: UserOut
@@ -166,19 +180,19 @@ class ConversationDetail(ConversationListItem):
 
 
 class CreateUser(RequestModel):
-    handle: str = Field(min_length=1, max_length=MAX_HANDLE_CHARS)
+    handle: str = Field(pattern=HANDLE_PATTERN)
 
 
 class CreateConversation(RequestModel):
     challenge_id: int
-    topic: str = Field(min_length=1, max_length=MAX_TOPIC_CHARS)
-    body: str = Field(min_length=1, max_length=MAX_BODY_CHARS)
+    topic: Topic
+    body: Body
     category: ConversationCategory
     priority: ConversationPriority = "medium"
 
 
 class CreateMessage(RequestModel):
-    body: str = Field(min_length=1, max_length=MAX_BODY_CHARS)
+    body: Body
     is_internal: bool = False
 
 
@@ -194,6 +208,24 @@ class PatchConversation(RequestModel):
     priority: ConversationPriority | None = None
     is_pinned: bool | None = None
     is_locked: bool | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def _reject_null_except_assignee(cls, data: Any) -> Any:
+        """Absent means unchanged, so an explicit null is a client bug, not a value.
+
+        assignee_id is the exception: its null is how a conversation is unassigned.
+        """
+        if not isinstance(data, dict):
+            return data
+        nulled = sorted(
+            field
+            for field, value in data.items()
+            if value is None and field in cls.model_fields and field != "assignee_id"
+        )
+        if nulled:
+            raise ValueError(f"null is not a value for: {', '.join(nulled)}")
+        return data
 
 
 class PatchMessage(RequestModel):

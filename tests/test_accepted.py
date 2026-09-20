@@ -51,6 +51,7 @@ def _open_conversation(client: Clients, author: str) -> dict:
 
 
 def _post(client: Clients, handle: str, conversation_id: int, **payload: object) -> dict:
+    """The created message: a reply answers with itself, not with the thread."""
     response = client(handle).post(
         f"/conversations/{conversation_id}/messages",
         json={"body": "Try a hardware-efficient ansatz first.", **payload},
@@ -83,8 +84,8 @@ def _accepted_rows(db_session: Session, conversation_id: int) -> list[int]:
 
 def _two_replies(client: Clients, conversation_id: int) -> tuple[int, int]:
     helper = _new_learner(client)
-    older = _message(_post(client, helper, conversation_id), 2)["id"]
-    newer = _message(_post(client, helper, conversation_id), 3)["id"]
+    older = _post(client, helper, conversation_id)["id"]
+    newer = _post(client, helper, conversation_id)["id"]
     return older, newer
 
 
@@ -132,7 +133,7 @@ def test_deleting_the_accepted_message_clears_the_flag_and_keeps_the_status(
     author = _new_learner(client)
     helper = _new_learner(client)
     conversation_id = _open_conversation(client, author)["id"]
-    answer_id = _message(_post(client, helper, conversation_id), 2)["id"]
+    answer_id = _post(client, helper, conversation_id)["id"]
 
     accepted = _accept(client, author, conversation_id, answer_id)
     assert accepted.status_code == 200, accepted.text
@@ -165,7 +166,7 @@ def test_accepting_the_opening_message_is_422(client: Clients) -> None:
 def test_accepting_an_internal_message_is_422(client: Clients) -> None:
     author = _new_learner(client)
     conversation_id = _open_conversation(client, author)["id"]
-    internal = _message(_post(client, STAFF_HANDLE, conversation_id, is_internal=True), 2)
+    internal = _post(client, STAFF_HANDLE, conversation_id, is_internal=True)
     assert internal["is_internal"] is True
 
     # Staff, because a caller who cannot see the message gets 404 before the 422.
