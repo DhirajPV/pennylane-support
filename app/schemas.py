@@ -34,7 +34,7 @@ ConversationCategory = Literal[*enums.CONVERSATION_CATEGORIES]
 T = TypeVar("T")
 
 
-def _not_blank(value: str) -> str:
+def _trimmed(value: str) -> str:
     """Trim, then insist something is left: a topic of spaces is not a topic."""
     trimmed = value.strip()
     if not trimmed:
@@ -42,7 +42,18 @@ def _not_blank(value: str) -> str:
     return trimmed
 
 
-Topic = Annotated[str, Field(max_length=MAX_TOPIC_CHARS), AfterValidator(_not_blank)]
+def _not_blank(value: str) -> str:
+    """Whitespace-only is refused, but the value goes back exactly as sent.
+
+    Never strip a body: four leading spaces are a CommonMark code block, and the
+    trailing newline belongs to whoever wrote it.
+    """
+    if not value.strip():
+        raise ValueError("must not be blank")
+    return value
+
+
+Topic = Annotated[str, Field(max_length=MAX_TOPIC_CHARS), AfterValidator(_trimmed)]
 Body = Annotated[str, Field(max_length=MAX_BODY_CHARS), AfterValidator(_not_blank)]
 
 

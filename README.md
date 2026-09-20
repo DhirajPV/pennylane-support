@@ -106,6 +106,7 @@ In the order they'd come:
 6. A spoiler wall, designed against the forum's own policy that staff give a push in the right direction rather than solutions.
 7. Verified identity replacing `get_current_user`, with the authorization tests unchanged. Write quotas come with it: they were left out deliberately, since a cap keyed on a self-declared header stops nobody.
 8. Lookup tables for status with `is_terminal`, and materialized insights once the dashboard query is slow enough to notice.
+9. A message-specific URL for the reply Location header; tests for replies beyond the first page of a thread and for a blocked lock wait; HTTP status assertions on every walkthrough step.
 
 ## Using the API
 
@@ -144,8 +145,8 @@ curl -H 'X-User: pennylane_support' \
   'localhost:8000/conversations?sort=priority&unassigned=true&unresolved=true&limit=10'  # the support queue
 curl -X POST -H 'X-User: quantum_learner42' -H 'Content-Type: application/json' \
   -d '{"type":"helpful"}' localhost:8000/conversations/1/messages/2/reactions   # react to a reply
-curl -X POST -H 'X-User: quantum_learner42' \
-  localhost:8000/conversations/1/messages/2/accept                           # accept it as the answer
+curl -s -X POST -H 'X-User: quantum_learner42' \
+  localhost:8000/conversations/319/messages/1169/accept | jq .status         # the asker accepts a reply: "open" becomes "answered"
 curl -H 'X-User: pennylane_support' localhost:8000/insights                  # the staff dashboard
 ```
 
@@ -227,7 +228,7 @@ sequence_no = 1)`, `NOT (is_accepted AND is_internal)`.
 | `conversations (created_at DESC, id DESC)` | `sort=newest` |
 | `conversations (status, created_at DESC)` | status-filtered lists |
 | `conversations (challenge_id, created_at DESC)` | a challenge's threads |
-| `conversations (assignee_id, created_at) WHERE resolved_at IS NULL AND deleted_at IS NULL` | one assignee's open work — **not** the unassigned queue; see `NOTES-docs.md` |
+| `conversations (assignee_id, created_at) WHERE resolved_at IS NULL AND deleted_at IS NULL` | one assignee's open work — **not** the unassigned queue |
 | `messages (conversation_id, sequence_no)` unique | ordering, the next sequence number, and the page-scoped aggregate |
 | `messages (conversation_id) UNIQUE WHERE is_accepted` | at most one accepted answer |
 | `messages (author_id, created_at)` | per-author lookups |
