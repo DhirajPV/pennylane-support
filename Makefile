@@ -18,8 +18,8 @@ migrate:  ## Run migrations against the running stack
 seed:     ## Run the seed against the running stack
 	$(COMPOSE) exec app python -m app.seed.load
 
-test:     ## Run pytest in a one-off container, after migrations and seed
-	$(COMPOSE) run --rm app pytest
+test:     ## Run pytest in a one-off container, after migrations
+	$(COMPOSE) run --rm -e SKIP_SEED=1 app pytest
 
 logs:     ## Follow the app logs
 	$(COMPOSE) logs -f app

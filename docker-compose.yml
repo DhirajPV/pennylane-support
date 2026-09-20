@@ -11,6 +11,7 @@ services:
     # /var/lib/postgresql/data mounts fine and persists nothing.
     volumes:
       - pgdata:/var/lib/postgresql
+      - ./docker/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U pennylane -d pennylane"]
       interval: 2s
@@ -26,6 +27,7 @@ services:
         condition: service_healthy
     environment:
       DATABASE_URL: postgresql+psycopg://pennylane:pennylane@db:5432/pennylane
+      DATABASE_URL_TEST: postgresql+psycopg://pennylane:pennylane@db:5432/pennylane_test
       QUOTA_CONVERSATIONS_PER_HOUR: 5
       QUOTA_MESSAGES_PER_HOUR: 30
       DEV: 1
